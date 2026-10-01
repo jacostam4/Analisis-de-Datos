@@ -1,0 +1,2395 @@
+---
+title: "Análisis de la Innovación Empresarial en los Sectores de Comercio y Servicios en Colombia"
+
+author:
+  - "Juan Pablo Montes León"
+  - "Andrés Felipe Rodríguez Ramírez"
+  - "Julián David Grosso Beltrán"
+  - "Juan Camilo Acosta Mahecha"
+
+subtitle: |
+  Profesor: César Augusto Serna Mejía
+  
+  Maestría en Analítica de Datos
+  
+  Fundamentos de Estadística para Analítica de Datos
+  
+  Universidad Central
+
+date: "`r Sys.Date()`"
+fontsize: 11pt
+output:
+  pdf_document:
+    toc: true
+    number_sections: false
+    fig_caption: true
+    latex_engine: xelatex
+    keep_tex: true
+    highlight: null
+header-includes:
+  - '\usepackage{xcolor}'
+  - '\usepackage{geometry}'
+  - '\geometry{top=2.0cm,bottom=2.0cm,left=2.0cm,right=2.0cm,includeheadfoot}'
+  - '\usepackage{fontspec}'
+  - '\defaultfontfeatures{Ligatures=TeX}'
+  - '\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{}'
+  - '\usepackage{polyglossia}'
+  - '\setdefaultlanguage{spanish}'
+  - '\usepackage{microtype}'
+  - '\setlength{\emergencystretch}{3em}'
+  - '\definecolor{darkred}{HTML}{8B0000}'
+  - '\definecolor{darkgreen}{HTML}{006400}'
+  - '\definecolor{darkblue}{HTML}{00008B}'
+  - '\definecolor{darkorange}{HTML}{FF8C00}'
+---
+
+```{r setup, include=FALSE}
+# El código no se muestra en el PDF: el documento solo presenta tablas, gráficas y resultados.
+# Las medidas de figura están calibradas al ancho útil de la página (21,59 cm - 4 cm de
+# márgenes = 6,93 pulgadas), de modo que ninguna gráfica se corte ni se salga de los márgenes.
+knitr::opts_chunk$set(
+  echo       = FALSE,
+  warning    = FALSE,
+  message    = FALSE,
+  fig.align  = "center",
+  fig.width  = 6.5,
+  fig.height = 3.9,
+  out.width  = "100%"
+)
+
+
+library(knitr)
+library(kableExtra)
+```
+
+
+
+# 1. Introducción
+
+La innovación dejó de ser un discurso y se convirtió en una línea del presupuesto, de manera que cada año las empresas de servicios y comercio deciden si destinan dinero a desarrollar capacidades propias, a incorporar tecnología o a formar a su gente, y esa decisión compite con todas las demás por los mismos recursos escasos, sin embargo en Colombia es difícil conocer con precisión quién está invirtiendo hoy en estos sectores, ni qué tienen en común las empresas en sus actividades económicas.
+
+Ese vacío tiene consecuencias prácticas, pues un directivo que evalúa si vale la pena destinar recursos en tecnología, en investigación interna o en la capacitación de los recursos humanos, sin tener conocimiento de los cambios en el mercado, no tiene contra qué contrastarse, y no sabe si es normal que una empresa de su actividad y su tamaño no invierta en nada, ni si las empresas que sí hacen procesos de inversión que tienen su misma actividad económica o pertenecen a otra, obtengan ganancias, debido a estas acciones tomadas; por lo que a falta de este referente, tanto en la decisión de invertir o no, se toman sin evidencia, conllevando a que diversos programas de innovación realicen división de recursos sin un perfil claro de a quién están llegando y a quién no.
+
+Por lo tanto, este estudio se concentra en una pregunta que puede convertirse en una decisión estratégica para las organizaciones: ¿Qué distingue a las empresas que destinan recursos a innovar de las que no lo hacen? y esto no se trata de llegar a medir todo el gasto agregado del país en innovación, cifra que ya publica el DANE, sino la de construir el tipo perfil de la empresa que decide invertir, en términos y conceptos que puedan reconocerse como el tamaño, la actividad, la estructura de propiedad, la madurez en certificaciones y los resultados en ventas.
+
+La Encuesta de Desarrollo e Innovación Tecnológica en los Sectores de Servicios y Comercio (EDITS VIII), aplicada por el DANE a 8.812 empresas, será la fuente que permita construir la idea del porqué se llega a tener ese vacío, ya que registra, para cada empresa, cuánto es el dinero destinado a la investigación y al desarrollo propio, a tecnologías de la información y a la formación de su personal, registrando los rasgos que podrían explicar esas decisiones a través de: la actividad económica en la que compite, los resultados de innovación que alcanzó, si obtuvo certificaciones de calidad, quién es su dueño, quién la gerencia, cuánta gente emplea y cuánto factura.
+
+Dejando entonces que la promesa no es la obtención de un diagnóstico general sobre la innovación en Colombia, sino una respuesta concreta a cómo puede ser la asignación de recursos, respondiendo: ¿Quién invierte?, ¿en qué se diferencia de quien no invierte? y ¿qué implica esa diferencia para quien debe decidir dónde poner el dinero?
+
+# 2. Justificación
+
+Los sectores de servicios y comercio concentran una parte decisiva del empleo formal y de la actividad económica del país y son precisamente los sectores donde la competencia se está redefiniendo por la vía tecnológica, aunque al mismo tiempo son los sectores sobre los que existe menos evidencia empresarial disponible, conllevando a que la conversación sobre la innovación en Colombia gire alrededor de la industria manufacturera; por lo que entender quién invierte en la transformación del mismo y qué caracteriza a esas empresas que lo hacen, aporta información que hoy no está sobre la mesa, ni para quien dirige una empresa, ni para quien diseña un instrumento de ayuda.
+
+Siendo así, que el valor de esto se traduce en decisiones concretas para las organizaciones, ya que, por un lado, les permite comparar el comportamiento de inversión de sus empresas con el de otras que operan en la misma actividad económica, identificando si su nivel de inversión en innovación se encuentra por encima, por debajo o en línea con la práctica habitual de su sector, y por otro lado, les ayuda a evaluar si existen factores en los que pueden actuar, como la obtención de certificaciones de calidad o la profesionalización de la gestión más allá de la estructura familiar fundadora, todo estando asociado a una mayor capacidad de decisión a invertir en transformación e innovación; así los resultados dejan de ser únicamente un ejercicio estadístico y se convierten en evidencia útil para orientar decisiones de gestión, crecimiento y competitividad; utilizando el análisis para identificar actividades económicas donde invertir en innovar sigue siendo extraño, facilitando la priorización de las estrategias de fortalecimiento, acompañamiento o financiamiento en lugares con un gran potencial de impacto.
+
+El alcance de los resultados va a ser definido desde las propias palabras del DANE sobre el EDITS VIII, donde los datos son «una operación tipo muestra determinística» con parámetros de inclusión diferenciados por subsector (DANE, 2023, p. 63), por lo que los hallazgos describen las características y asociaciones observadas en las empresas efectivamente investigadas, donde si bien el estudio permite identificar patrones y relaciones entre variables relevantes para la toma de decisiones, no permite realizar inferencias sobre el conjunto del universo empresarial colombiano ni establecer relaciones de causalidad entre los factores analizados.
+
+# 3. Objetivos
+
+## 3.1 Objetivo general
+
+Determinar cómo la combinación de inversiones en I+D, maquinaria, software y formación del talento humano, junto con las prácticas de gestión y la composición del capital humano, permite distinguir a las empresas tecnológicas de las no tecnológicas dentro de los sectores de servicios y comercio en 2021, y calcular la brecha resultante en términos de productividad y competitividad, de modo que se identifiquen las estrategias que favorecen una mejor posición competitiva en el contexto de transformación tecnológica.
+
+## 3.2 Objetivos específicos
+
+1.  Describir la distribución de ingresos y tamaño del personal ocupado entre las distintas actividades económicas del sector servicios y comercio.
+2.  Categorizar la tipología de innovación (I+D interna, tecnologías de la información y formación) que concentra la mayor proporción de empresas con inversión.
+3.  Comparar los niveles de ingresos y de inversión en innovación entre empresas con certificaciones de calidad de proceso y aquellas que no las poseen.
+4.  Determinar qué tipo de propietario y qué esquema de gerencia (una empresa dirigida por su fundador o por un familiar del fundador, frente a una dirigida por alguien ajeno a la familia) presentan mayor propensión a invertir en actividades de innovación.
+5.  Establecer la relación entre el tamaño de la empresa (personal ocupado), el nivel de ingresos y los montos destinados a I+D interna, tecnologías de la información y formación.
+
+# 4. Análisis estadístico
+
+## 4.0 Librerías, datos y funciones generales
+
+Este bloque se corre una sola vez y no se vuelve a mostrar en el resto del documento: carga las
+librerías, lee y prepara la base, y define todas las funciones que después se reutilizan en cada
+variable o cada cruce de variables. Todo el código queda oculto a propósito; el resto del documento
+solo muestra tablas, gráficas y resultados.
+
+```{r librerias, include=FALSE}
+# install.packages(c("readxl","dplyr","tidyr","ggplot2","e1071","knitr"))
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(e1071)
+library(knitr)
+library(kableExtra)
+
+tema_edits <- theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 10, color = "gray35"),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.title = element_text(face = "bold")
+  )
+```
+
+```{r tema-graficas, include=FALSE}
+library(scales)
+
+tema_graficas <- theme_minimal(base_size = 11) +
+  theme(
+    plot.title       = element_text(face = "bold", size = 13, color = "#1a1a1a"),
+    plot.subtitle    = element_text(size = 9.5, color = "gray40", margin = margin(b = 10)),
+    axis.title       = element_text(face = "bold", size = 10, color = "#333333"),
+    axis.text        = element_text(size = 9, color = "#555555"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "gray90", linewidth = 0.3),
+    legend.position  = "none",
+    plot.margin      = margin(12, 18, 10, 10),
+    plot.background  = element_rect(fill = "white", color = NA)
+  )
+
+col_principal <- "#2C5F7F"
+col_media     <- "#E6550D"
+col_mediana   <- "#B2182B"
+```
+
+```{r cargar-datos, include=FALSE}
+datos <- read_excel("PROYECTO POSGRADO ANALITICA - 1.xlsx", sheet = "EDITS2021_muestra")
+
+datos <- datos %>%
+  rename(
+    SECTOR        = Sector,
+    TIPOLOGIA     = Tipologia,
+    CERTIFICACION = Certificacion,
+    PROPIETARIO   = Propietario,
+    GERENTE       = Gerente,
+    INGRESOS      = Ingresos,
+    INV_ID        = `Inversion ID interna`,
+    INV_TIC       = `Inversion TIC`,
+    INV_FORMACION = `Inversion formación`,
+    PERSONAL      = Personal
+  )
+
+a_numero <- function(x) as.numeric(gsub(",", ".", as.character(x)))
+datos$INGRESOS      <- a_numero(datos$INGRESOS)
+datos$INV_ID        <- a_numero(datos$INV_ID)
+datos$INV_TIC       <- a_numero(datos$INV_TIC)
+datos$INV_FORMACION <- a_numero(datos$INV_FORMACION)
+datos$PERSONAL      <- a_numero(datos$PERSONAL)
+
+datos$GERENTE <- factor(datos$GERENTE, levels = c("SI", "NO"))
+
+vars_cualitativas  <- c("SECTOR", "TIPOLOGIA", "CERTIFICACION", "PROPIETARIO", "GERENTE")
+vars_cuantitativas <- c("INGRESOS", "INV_ID", "INV_TIC", "INV_FORMACION", "PERSONAL")
+```
+
+```{r utilidades, include=FALSE}
+# Etiquetas legibles para títulos y ejes (los nombres internos se conservan intactos)
+etiquetas_vars <- c(
+  SECTOR        = "Sector (CIIU4)",
+  TIPOLOGIA     = "Tipología de innovación",
+  CERTIFICACION = "Certificación de calidad",
+  PROPIETARIO   = "Propietario",
+  GERENTE       = "Gerencia fundador/familiar",
+  INGRESOS      = "Ingresos",
+  INV_ID        = "Inversión en I+D interna",
+  INV_TIC       = "Inversión en TIC",
+  INV_FORMACION = "Inversión en formación",
+  PERSONAL      = "Personal ocupado"
+)
+etq <- function(v) { e <- unname(etiquetas_vars[v]); ifelse(is.na(e), v, e) }
+
+unidades_vars <- c(
+  INGRESOS      = "miles de pesos corrientes",
+  INV_ID        = "miles de pesos corrientes",
+  INV_TIC       = "miles de pesos corrientes",
+  INV_FORMACION = "miles de pesos corrientes",
+  PERSONAL      = "número de personas"
+)
+uni <- function(v) { e <- unname(unidades_vars[v]); ifelse(is.na(e), "", e) }
+
+# Paleta coherente con los colores ya definidos para el documento
+paleta_cual <- function(k) {
+  base <- c("#2C5F7F", "#E6550D", "#6BAED6", "#B2182B", "#74C476",
+            "#9E9AC8", "#FDAE6B", "#A1D99B", "#3182BD", "#D6616B")
+  if (k <= length(base)) base[seq_len(k)] else colorRampPalette(base)(k)
+}
+
+fmt_i <- function(v) formatC(as.numeric(v), format = "d", big.mark = ".",
+                             decimal.mark = ",")
+fmt_p <- function(v, d = 1) formatC(as.numeric(v), format = "f", digits = d,
+                                    decimal.mark = ",")
+
+fuente_edits <- "Fuente: DANE, EDITS VIII (2020-2021). Cálculos propios."
+
+# Parte los títulos largos en varias líneas para que nunca se salgan de la figura
+envolver <- function(s, ancho = 56) paste(strwrap(s, width = ancho), collapse = "\n")
+```
+
+```{r funcion-univariado-cualitativa, include=FALSE}
+# Las barras se trazan en horizontal porque SECTOR tiene 23 categorías y PROPIETARIO
+# rótulos largos: así ninguna etiqueta se corta ni se sale de los márgenes de la página.
+# El diagrama de sectores agrupa la cola de categorías menores cuando hay demasiadas,
+# de modo que los porcentajes sigan siendo legibles.
+resumen_cualitativa <- function(variable, color = "#2C7FB8", max_sectores_pie = 8) {
+  fi <- table(datos[[variable]])
+  tabla <- data.frame(Categoria = names(fi), fi = as.numeric(fi))
+  tabla$hi <- round(tabla$fi / sum(tabla$fi), 4)
+  tabla <- tabla[order(-tabla$fi), ]
+  tabla$Fi <- cumsum(tabla$fi)
+  tabla$Hi <- round(cumsum(tabla$hi), 4)
+
+  n <- sum(tabla$fi)
+
+  # ---- B. Diagrama de barras ----
+  barras <- tabla
+  barras$Categoria <- factor(barras$Categoria, levels = rev(tabla$Categoria))
+
+  p_barras <- ggplot(barras, aes(x = Categoria, y = fi)) +
+    geom_col(fill = color, width = 0.72) +
+    geom_text(aes(label = paste0(fmt_i(fi), "  (", fmt_p(hi * 100, 1), "%)")),
+              hjust = -0.08, size = 2.8, color = "#1a2b4c", fontface = "bold") +
+    coord_flip() +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.22)),
+                       labels = scales::label_number(big.mark = ".", decimal.mark = ",")) +
+    labs(title = envolver(paste("Diagrama de barras —", etq(variable))),
+         subtitle = paste0("Frecuencia absoluta (fi) y relativa (hi) · n = ", fmt_i(n)),
+         x = etq(variable), y = "Número de empresas (fi)") +
+    tema_graficas +
+    theme(panel.grid.major.y = element_blank(),
+          axis.text.y = element_text(size = 8.5))
+
+  # ---- C. Diagrama de sectores ----
+  pie_df <- tabla[, c("Categoria", "fi", "hi")]
+  if (nrow(pie_df) > max_sectores_pie) {
+    cab <- pie_df[seq_len(max_sectores_pie - 1), ]
+    col <- pie_df[-seq_len(max_sectores_pie - 1), ]
+    pie_df <- rbind(cab, data.frame(
+      Categoria = paste0("Otras ", nrow(col), " categorías"),
+      fi = sum(col$fi), hi = sum(col$hi)))
+  }
+  pie_df$Categoria <- factor(pie_df$Categoria, levels = pie_df$Categoria)
+  pie_df$pct <- pie_df$fi / sum(pie_df$fi) * 100
+  # Solo se rotulan los segmentos con al menos un 5%: por debajo de ese umbral las
+  # etiquetas se superponen entre sí. El valor exacto de todas las categorías queda
+  # siempre disponible en la tabla de frecuencia del apartado A.
+  pie_df$etiqueta <- ifelse(pie_df$pct >= 5, paste0(fmt_p(pie_df$pct, 1), "%"), "")
+
+  p_pie <- ggplot(pie_df, aes(x = "", y = fi, fill = Categoria)) +
+    geom_col(width = 1, color = "white", linewidth = 0.4) +
+    coord_polar(theta = "y", start = 0) +
+    geom_text(aes(label = etiqueta), position = position_stack(vjust = 0.5),
+              size = 3.0, color = "white", fontface = "bold") +
+    scale_fill_manual(values = paleta_cual(nrow(pie_df)), name = etq(variable)) +
+    labs(title = envolver(paste("Diagrama de sectores —", etq(variable))),
+         subtitle = paste0("Participación porcentual (hi) · n = ", fmt_i(n)),
+         x = NULL, y = NULL) +
+    tema_graficas +
+    theme(legend.position = "right",
+          legend.title = element_text(face = "bold", size = 8.5),
+          legend.text  = element_text(size = 8),
+          legend.key.size = unit(0.40, "cm"),
+          panel.grid = element_blank(),
+          axis.text  = element_blank(),
+          axis.title = element_blank())
+
+  list(tabla = tabla, p_barras = p_barras, p_pie = p_pie)
+}
+
+res_cual <- setNames(lapply(vars_cualitativas, resumen_cualitativa), vars_cualitativas)
+```
+
+```{r funcion-univariado-cuantitativa, include=FALSE}
+# escala_tallo permite que el diagrama de tallo y hojas use una escala distinta a la del
+# resto de gráficas. Se añadió porque en PERSONAL la escala lineal genera un único tallo
+# con casi 3.800 hojas, que resulta ilegible; en log10 el diagrama se despliega en tallos
+# de tamaño manejable sin alterar ninguna de las demás salidas de la variable.
+resumen_cuantitativa <- function(variable, color = col_principal, n_clases = NULL,
+                                  escala = "normal", escala_tallo = escala) {
+  x <- na.omit(datos[[variable]])
+  n <- length(x)
+  
+  if (escala == "log") {
+    x_pos <- x[x > 0]
+  } else {
+    x_pos <- x
+  }
+  
+  if (is.null(n_clases)) n_clases <- round(1 + 3.322 * log10(n))
+  
+  # ---- Intervalos ----
+  amplitud <- (max(x) - min(x)) / n_clases
+  breaks <- min(x) + amplitud * (0:n_clases)
+  breaks[length(breaks)] <- max(x) + amplitud * 0.001
+  
+  lim_inf <- format(round(breaks[-length(breaks)], 0), big.mark = ".", scientific = FALSE)
+  lim_sup <- format(round(breaks[-1], 0), big.mark = ".", scientific = FALSE)
+  etiquetas <- paste0("[", lim_inf, ", ", lim_sup, ")")
+  etiquetas[length(etiquetas)] <- paste0("[", lim_inf[length(lim_inf)], ", ",
+                                          lim_sup[length(lim_sup)], "]")
+  
+  clase_cut <- cut(x, breaks = breaks, include.lowest = TRUE, right = FALSE, labels = etiquetas)
+  fi <- as.numeric(table(clase_cut))
+  
+  tabla <- data.frame(
+    Intervalo   = levels(clase_cut),
+    fi          = fi,
+    Clase_Media = round((breaks[-length(breaks)] + breaks[-1]) / 2, 2)
+  )
+  tabla$hi <- round(tabla$fi / n, 4)
+  tabla$Fi <- cumsum(tabla$fi)
+  tabla$Hi <- round(cumsum(tabla$hi), 4)
+  tabla <- tabla[, c("Intervalo", "fi", "hi", "Fi", "Hi", "Clase_Media")]
+  
+  # ---- Medidas ----
+  moda_fun <- function(v) { t <- table(v); as.numeric(names(t)[which.max(t)]) }
+  media <- mean(x); mediana <- median(x); moda <- moda_fun(x)
+  desv <- sd(x); var_x <- var(x); cv <- (desv / media) * 100
+  q1 <- quantile(x, .25); q3 <- quantile(x, .75); iqr_x <- IQR(x)
+  asim <- skewness(x); curt <- kurtosis(x)
+  
+  medidas <- data.frame(
+    Medida = c("Media","Mediana","Moda","Desviación estándar","Varianza",
+               "Coeficiente de variación (%)","Mínimo","Máximo","Rango",
+               "Q1","Q3","Rango intercuartílico","Asimetría","Curtosis"),
+    Valor = round(c(media, mediana, moda, desv, var_x, cv, min(x), max(x),
+                    max(x) - min(x), q1, q3, iqr_x, asim, curt), 2)
+  )
+  
+  # ---- Configuración del eje X ----
+  if (escala == "log") {
+    x_plot <- x_pos
+    breaks_pos <- breaks[breaks > 0]
+    breaks_lab <- breaks_pos
+    if (length(breaks_lab) > 5) {
+      breaks_lab <- breaks_lab[seq(1, length(breaks_lab), length.out = 5)]
+    }
+    escala_x <- scale_x_log10(
+      breaks = breaks_lab,
+      labels = scales::label_number(big.mark = ".", decimal.mark = ",", accuracy = 1)
+    )
+    etiqueta_x <- paste0(etq(variable), " (escala logarítmica)")
+  } else {
+    x_plot <- x
+    escala_x <- scale_x_continuous(
+      breaks = breaks,
+      labels = scales::label_number(big.mark = ".", decimal.mark = ",",
+                                    scale_cut = scales::cut_short_scale())
+    )
+    etiqueta_x <- etq(variable)
+  }
+
+  # Las gráficas en escala logarítmica solo pueden representar los valores positivos:
+  # se reportan el n y la mediana de lo que efectivamente se dibuja, para no anotar
+  # una mediana de 0 sobre una gráfica de la que los ceros están excluidos.
+  n_plot     <- length(x_plot)
+  med_plot   <- median(x_plot)
+  media_plot <- mean(x_plot)
+  nota_ceros <- if (escala == "log" && n_plot < n) {
+    paste0("Se excluyen las ", fmt_i(n - n_plot),
+           " empresas con valor 0 (no representables en escala logarítmica)")
+  } else NULL
+  
+  escala_x_box <- if (escala == "log") {
+    scale_x_log10(labels = scales::label_number(big.mark = ".", decimal.mark = ",", accuracy = 1))
+  } else {
+    scale_x_continuous(labels = scales::label_number(big.mark = ".", decimal.mark = ",",
+                                                      scale_cut = scales::cut_short_scale()))
+  }
+  
+  fmt_num <- function(v) format(round(v, 0), big.mark = ".", scientific = FALSE)
+  sci_labels <- function(breaks) {
+    inf <- format(breaks[-length(breaks)], scientific = TRUE, digits = 3)
+    sup <- format(breaks[-1], scientific = TRUE, digits = 3)
+    etq <- paste0("[", inf, ", ", sup, ")")
+    etq[length(etq)] <- paste0("[", inf[length(inf)], ", ", sup[length(sup)], "]")
+    etq
+  }
+  
+  # ---- B. HISTOGRAMA con etiquetas en notación científica ----
+  fmt_num <- function(v) format(round(v, 0), big.mark = ".", scientific = FALSE)
+  
+  # Regenerar etiquetas de los intervalos en notación científica
+  sci_labels <- function(breaks) {
+    inf <- format(breaks[-length(breaks)], scientific = TRUE, digits = 3)
+    sup <- format(breaks[-1], scientific = TRUE, digits = 3)
+    etq <- paste0("[", inf, ", ", sup, ")")
+    etq[length(etq)] <- paste0("[", inf[length(inf)], ", ", sup[length(sup)], "]")
+    etq
+  }
+  
+  datos_hist <- tabla
+  datos_hist$centro <- datos_hist$Clase_Media
+  datos_hist$densidad <- datos_hist$fi / (n * amplitud)
+  datos_hist$etiqueta_n <- as.character(datos_hist$fi)
+  datos_hist$Intervalo_sci <- sci_labels(breaks)
+  
+  p_hist <- ggplot(datos_hist, aes(x = centro, y = densidad)) +
+    geom_col(width = amplitud * 0.92, fill = color,
+             color = "white", alpha = 0.85, linewidth = 0.35) +
+    geom_text(aes(label = etiqueta_n),
+              vjust = -0.5, size = 2.6,
+              color = "#1a2b4c", fontface = "bold") +
+    geom_vline(xintercept = mediana, color = "#E6550D",
+               linetype = "dashed", linewidth = 0.8) +
+    geom_vline(xintercept = media, color = "#1F4E79",
+               linetype = "dashed", linewidth = 0.8) +
+    # Las etiquetas se anclan a las esquinas superiores del panel y conservan el color de
+    # su línea: colocarlas junto a la línea las dejaba cortadas o superpuestas entre sí
+    # cuando media y mediana caen muy próximas al extremo izquierdo del eje.
+    annotate("text", x = -Inf, y = Inf,
+             label = paste0("Mediana = ", fmt_num(mediana)),
+             hjust = -0.05, vjust = 1.5, size = 2.7,
+             color = "#E6550D", fontface = "bold") +
+    annotate("text", x = Inf, y = Inf,
+             label = paste0("Media = ", fmt_num(media)),
+             hjust = 1.05, vjust = 1.5, size = 2.7,
+             color = "#1F4E79", fontface = "bold") +
+    scale_x_continuous(breaks = datos_hist$centro,
+                       labels = datos_hist$Intervalo_sci,
+                       limits = c(min(breaks), max(breaks))) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.28))) +
+    labs(title = envolver(paste("Histograma —", etq(variable))),
+         subtitle = envolver(paste0("El número sobre cada barra indica la frecuencia absoluta (fi) · n = ",
+                                    fmt_i(n)), 86),
+         x = paste0(etq(variable), " (", uni(variable), ")"), y = "Densidad") +
+    tema_graficas +
+    theme(axis.text.x = element_text(angle = 55, hjust = 1, size = 6.5))
+
+  # ---- C. Polígono ----
+  poligono_df <- data.frame(
+    Marca = c(tabla$Clase_Media[1] - amplitud, tabla$Clase_Media,
+              tabla$Clase_Media[nrow(tabla)] + amplitud),
+    Frecuencia = c(0, tabla$fi, 0)
+  )
+  if (escala == "log") poligono_df <- poligono_df[poligono_df$Marca > 0, ]
+  
+  p_poligono <- ggplot(poligono_df, aes(x = Marca, y = Frecuencia)) +
+    geom_area(fill = color, alpha = 0.15) +
+    geom_line(color = color, linewidth = 0.9) +
+    geom_point(color = color, size = 2.8, fill = "white", shape = 21, stroke = 1.1) +
+    escala_x +
+    labs(title = envolver(paste("Polígono de frecuencias —", etq(variable))),
+         subtitle = envolver(paste(c("Puntos medios de cada intervalo unidos por segmentos",
+                                     nota_ceros), collapse = " · "), 86),
+         x = etiqueta_x, y = "Frecuencia absoluta") +
+    tema_graficas +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+  
+    # ---- D. Densidad con etiquetas en notación científica ----
+  fmt_num <- function(v) format(round(v, 0), big.mark = ".", scientific = FALSE)
+  
+  centros <- tabla$Clase_Media
+  
+  p_densidad <- ggplot(data.frame(x = x_plot), aes(x = x)) +
+    geom_density(fill = color, alpha = 0.3, color = "#1a2b4c", linewidth = 0.9) +
+    geom_vline(xintercept = med_plot, color = "#E6550D",
+               linetype = "dashed", linewidth = 0.8) +
+    geom_vline(xintercept = media_plot, color = "#1F4E79",
+               linetype = "dashed", linewidth = 0.8) +
+    annotate("text", x = -Inf, y = Inf,
+             label = paste0("Mediana = ", fmt_num(med_plot)),
+             hjust = -0.05, vjust = 1.5, size = 2.7,
+             color = "#E6550D", fontface = "bold") +
+    annotate("text", x = Inf, y = Inf,
+             label = paste0("Media = ", fmt_num(media_plot)),
+             hjust = 1.05, vjust = 1.5, size = 2.7,
+             color = "#1F4E79", fontface = "bold") +
+    scale_x_continuous(breaks = centros, labels = sci_labels(breaks),
+                       limits = c(min(breaks), max(breaks))) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.28))) +
+    labs(title = envolver(paste("Curva de densidad (Kernel) —", etq(variable))),
+         subtitle = envolver(paste(c(paste0("Mismos intervalos que la tabla de frecuencia · n = ",
+                                            fmt_i(n_plot)), nota_ceros), collapse = " · "), 86),
+         x = paste0(etq(variable), " (", uni(variable), ")"), y = "Densidad") +
+    tema_graficas +
+    theme(axis.text.x = element_text(angle = 55, hjust = 1, size = 6.5))
+  
+  # ---- E. Ojiva ----
+  ojiva_df <- data.frame(Limite = breaks, Frec_acum = c(0, tabla$Fi))
+  if (escala == "log") ojiva_df <- ojiva_df[ojiva_df$Limite > 0, ]
+  
+  p_ojiva <- ggplot(ojiva_df, aes(x = Limite, y = Frec_acum)) +
+    geom_step(color = color, linewidth = 1, direction = "hv") +
+    geom_point(color = color, size = 2.5, fill = "white", shape = 21, stroke = 1) +
+    geom_hline(yintercept = n, linetype = "dotted", color = "gray50", linewidth = 0.5) +
+    escala_x +
+    labs(title = envolver(paste("Ojiva de frecuencias acumuladas —", etq(variable))),
+         subtitle = envolver(paste(c(paste0("Frecuencia acumulada · n = ", fmt_i(n)),
+                                     nota_ceros), collapse = " · "), 86),
+         x = etiqueta_x, y = "Frecuencia absoluta acumulada") +
+    tema_graficas +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+  
+  # ---- F. BOXPLOT ----
+  p_box <- ggplot(data.frame(x = x_plot), aes(x = x, y = 1)) +
+    geom_boxplot(fill = color, alpha = 0.55, color = "#1a2b4c",
+                 linewidth = 0.8, width = 0.5,
+                 outlier.color = "#c0392b", outlier.size = 1.0,
+                 outlier.alpha = 0.4, outlier.shape = 16,
+                 staplewidth = 0.5) +
+    # La anotación se ancla al borde izquierdo del panel: centrarla sobre la mediana la
+    # dejaba cortada en las variables donde la mediana cae pegada al extremo del eje.
+    annotate("text", x = -Inf, y = 0.52,
+             label = paste0("n = ", fmt_i(n_plot),
+                            "\nMediana = ", fmt_num(med_plot)),
+             hjust = -0.06, vjust = 1, size = 3,
+             color = "#1a2b4c", lineheight = 0.95, fontface = "bold") +
+    escala_x_box +
+    scale_y_continuous(limits = c(0.35, 1.55), breaks = NULL) +
+    labs(title = envolver(paste("Diagrama de caja y bigotes —", etq(variable))),
+         subtitle = envolver(paste(c("Puntos rojos = valores atípicos", nota_ceros),
+                                   collapse = " · "), 86),
+         x = etiqueta_x, y = NULL) +
+    tema_graficas +
+    theme(axis.text.y        = element_blank(),
+          axis.ticks.y       = element_blank(),
+          panel.grid.major.y = element_blank(),
+          axis.text.x        = element_text(angle = 0, hjust = 0.5, size = 8))
+  
+  # ---- H. Tallo y hojas ----
+  variable_limpia <- etq(variable)
+  
+  if (escala_tallo == "log") {
+    x_th    <- log10(x[x > 0])
+    esc_th  <- 0.1
+    unidad  <- paste0("log10 del valor (", uni(variable), ")")
+    titulo_th <- paste("Diagrama de tallo y hojas -", variable_limpia, "(log10)")
+  } else {
+    x_th    <- x[x > 0]
+    max_x   <- max(x_th)
+    esc_th  <- 10^(floor(log10(max_x)) - 1)
+    unidad  <- "unidades del tallo"
+    titulo_th <- paste("Diagrama de tallo y hojas -", variable_limpia)
+  }
+  
+  x_esc <- round(x_th / esc_th, 1)
+  tallo <- floor(x_esc)
+  hoja  <- round((x_esc - tallo) * 10)
+  hoja[hoja > 9] <- 9
+  hoja[hoja < 0] <- 0
+  
+  df_th <- data.frame(Tallo = tallo, Hoja = hoja)
+  df_th <- df_th[order(df_th$Tallo, df_th$Hoja), ]
+  
+  resumen <- aggregate(Hoja ~ Tallo, data = df_th,
+                       FUN = function(h) paste(sort(h), collapse = " "))
+  conteos <- aggregate(Hoja ~ Tallo, data = df_th, FUN = length)
+  resumen$n <- paste0("(", conteos$Hoja, ")")
+  colnames(resumen) <- c("Tallo", "Hoja", "n")
+  
+  tallo_df  <- resumen[, c("Tallo", "Hoja", "n")]
+  tallo_tit <- titulo_th
+  tallo_uni <- paste0("Unidad del tallo: ", unidad,
+                      ". n = ", length(x_th),
+                      ". Se excluyen los ceros.")
+  
+  list(tabla = tabla, medidas = medidas,
+       p_hist = p_hist, p_poligono = p_poligono, p_densidad = p_densidad,
+       p_ojiva = p_ojiva, p_box = p_box, x = x,
+       tallo_df = tallo_df, tallo_titulo = tallo_tit, tallo_unidad = tallo_uni)
+}
+
+res_cuant <- list(
+  INGRESOS      = resumen_cuantitativa("INGRESOS",      escala = "log", n_clases = 6),
+  INV_ID        = resumen_cuantitativa("INV_ID",        escala = "log", n_clases = 10),
+  INV_TIC       = resumen_cuantitativa("INV_TIC",       escala = "log", n_clases = 10),
+  INV_FORMACION = resumen_cuantitativa("INV_FORMACION", escala = "log", n_clases = 10),
+  PERSONAL      = resumen_cuantitativa("PERSONAL",      escala = "normal", n_clases = 10,
+                                       escala_tallo = "log")
+)
+```
+
+```{r funcion-bivariado-cuantitativo, include=FALSE}
+# Se separan las dos gráficas que pide el documento: el diagrama de dispersión puro
+# (apartado A) y la recta de regresión con su banda de confianza (apartado C). La
+# correlación de Pearson no se grafica: solo se analiza su valor (apartado B).
+analisis_bivariado_cuant <- function(var1, var2) {
+  df <- na.omit(datos[, c(var1, var2)])
+  names(df) <- c("x", "y")
+
+  correlacion <- cor.test(df$x, df$y, method = "pearson")
+  modelo      <- lm(y ~ x, data = df)
+  r2          <- summary(modelo)$r.squared
+  b           <- coef(modelo)
+
+  esc_x <- scale_x_continuous(labels = scales::label_number(
+    big.mark = ".", decimal.mark = ",", scale_cut = scales::cut_short_scale()))
+  esc_y <- scale_y_continuous(labels = scales::label_number(
+    big.mark = ".", decimal.mark = ",", scale_cut = scales::cut_short_scale()))
+  lab_x <- paste0(etq(var1), " (", uni(var1), ")")
+  lab_y <- paste0(etq(var2), " (", uni(var2), ")")
+
+  p_disp <- ggplot(df, aes(x = x, y = y)) +
+    geom_point(color = col_principal, alpha = 0.30, size = 1.3) +
+    esc_x + esc_y +
+    labs(title = envolver(paste0("Diagrama de dispersión — ", etq(var1),
+                                 " vs. ", etq(var2))),
+         subtitle = paste0("Cada punto representa una empresa · n = ", fmt_i(nrow(df))),
+         x = lab_x, y = lab_y) +
+    tema_graficas
+
+  etq_mod <- paste0("y = ", formatC(b[1], format = "f", digits = 2,
+                                    big.mark = ".", decimal.mark = ","),
+                    " + ", formatC(b[2], format = "g", digits = 4, decimal.mark = ","),
+                    " x   |   R² = ", fmt_p(r2, 4),
+                    "   |   r = ", fmt_p(unname(correlacion$estimate), 4))
+
+  p_reg <- ggplot(df, aes(x = x, y = y)) +
+    geom_point(color = col_principal, alpha = 0.25, size = 1.3) +
+    geom_smooth(method = "lm", formula = y ~ x, se = TRUE,
+                color = col_media, fill = col_media, alpha = 0.18, linewidth = 0.9) +
+    esc_x + esc_y +
+    annotate("label", x = -Inf, y = Inf, label = etq_mod, hjust = -0.02, vjust = 1.2,
+             size = 2.6, color = "#1a2b4c", fontface = "bold",
+             label.size = 0.25, fill = "white", alpha = 0.85) +
+    labs(title = envolver(paste0("Regresión lineal simple — ", etq(var2),
+                                 " en función de ", etq(var1))),
+         subtitle = "Recta de mínimos cuadrados con banda de confianza al 95%",
+         x = lab_x, y = lab_y) +
+    tema_graficas
+
+  list(p_disp = p_disp, p_reg = p_reg, correlacion = correlacion,
+       modelo = modelo, var1 = var1, var2 = var2)
+}
+
+pares_cuantitativos <- combn(vars_cuantitativas, 2, simplify = FALSE)
+res_biv_cuant <- setNames(
+  lapply(pares_cuantitativos, function(p) analisis_bivariado_cuant(p[1], p[2])),
+  sapply(pares_cuantitativos, function(p) paste(p[1], p[2], sep = "_x_"))
+)
+```
+
+```{r funcion-tabla-frec, include=FALSE}
+tabla_frec <- function(tabla, titulo, tipo = "cuantitativa",
+                       fuente = "Fuente: DANE, EDITS VIII (2020-2021). Cálculos propios.") {
+  t <- tabla
+  
+  # Formateo numérico consistente
+  if ("fi" %in% names(t)) t$fi <- format(as.numeric(t$fi), big.mark = ".", decimal.mark = ",",
+                                          scientific = FALSE, trim = TRUE)
+  if ("Fi" %in% names(t)) t$Fi <- format(as.numeric(t$Fi), big.mark = ".", decimal.mark = ",",
+                                          scientific = FALSE, trim = TRUE)
+  if ("hi" %in% names(t)) t$hi <- format(round(as.numeric(t$hi), 4), nsmall = 4, decimal.mark = ",")
+  if ("Hi" %in% names(t)) t$Hi <- format(round(as.numeric(t$Hi), 4), nsmall = 4, decimal.mark = ",")
+  if ("Clase_Media" %in% names(t)) {
+    t$Clase_Media <- format(round(as.numeric(t$Clase_Media), 0),
+                            big.mark = ".", decimal.mark = ",", scientific = FALSE, trim = TRUE)
+  }
+  
+  # Nombres de columnas según el tipo de tabla
+  if (tipo == "cualitativa") {
+    cols   <- c("Categoría", "fi", "hi", "Fi", "Hi")
+    aligns <- c("l", "r", "r", "r", "r")
+  } else {
+    cols   <- c("Intervalo", "fi", "hi", "Fi", "Hi", "Clase media")
+    aligns <- c("l", "r", "r", "r", "r", "r")
+  }
+  
+  # Tabla con cebra, sin bordes superior e inferior
+  kbl(
+    t,
+    format    = "latex",
+    booktabs  = TRUE,
+    longtable = TRUE,
+    row.names = FALSE,
+    col.names = cols,
+    caption   = titulo,
+    align     = aligns,
+    linesep   = "",
+    escape    = FALSE
+  ) |>
+    kable_styling(
+      latex_options = c("striped", "repeat_header", "HOLD_position"),
+      font_size     = 10,
+      full_width    = FALSE,
+      stripe_color  = "gray!8",
+      position      = "center"
+    ) |>
+    row_spec(0, bold = TRUE, color = "white", background = "#404040") |>
+    row_spec(nrow(t), hline_after = FALSE) |>       # ← quita línea inferior
+    footnote(
+      general           = fuente,
+      general_title     = "",
+      footnote_as_chunk = TRUE,
+      threeparttable    = TRUE
+    )
+}
+```
+
+```{r tabla-medidas, include=FALSE}
+tabla_medidas <- function(medidas, titulo,
+                          fuente = "Fuente: DANE, EDITS VIII (2020-2021). Cálculos propios.") {
+  t <- medidas
+  t$Valor <- format(round(as.numeric(t$Valor), 2), big.mark = ".", decimal.mark = ",",
+                    scientific = FALSE, trim = TRUE)
+  
+  kbl(t, format = "latex", booktabs = TRUE, longtable = TRUE,
+      row.names = FALSE, col.names = c("Medida", "Valor"),
+      caption = titulo, align = c("l", "r"), linesep = "") |>
+    kable_styling(latex_options = c("striped", "repeat_header", "HOLD_position"),
+                  font_size = 10, full_width = FALSE, stripe_color = "gray!8",
+                  position = "center") |>
+    row_spec(0, bold = TRUE, color = "white", background = "#404040") |>
+    row_spec(nrow(t), hline_after = FALSE) |>
+    footnote(general = fuente, general_title = "",
+             footnote_as_chunk = TRUE, threeparttable = TRUE)
+}
+```
+
+```{r funcion-mostrar-tallo, include=FALSE}
+mostrar_tallo_hojas <- function(obj) {
+  t <- obj$tallo_df
+  # Integrar el conteo n al final de la columna Hoja
+  t$Hoja <- paste0(t$Hoja, "   ", t$n)
+  t <- t[, c("Tallo", "Hoja")]
+  
+  kbl(t, format = "latex", booktabs = TRUE, longtable = TRUE,
+      row.names = FALSE, col.names = c("Tallo", "Hoja"),
+      caption = obj$tallo_titulo, align = c("r", "l"), linesep = "",
+      escape = TRUE) |>
+    kable_styling(latex_options = c("repeat_header", "HOLD_position"),
+                  font_size = 9, full_width = FALSE,
+                  position = "center") |>
+    row_spec(0, bold = TRUE, background = "#f0f0f0") |>
+    column_spec(1, width = "1.5cm") |>
+    column_spec(2, width = "11cm") |>
+    footnote(general = obj$tallo_unidad, general_title = "",
+             footnote_as_chunk = TRUE, threeparttable = TRUE)
+}
+```
+
+```{r funcion-bivariado-cualitativo, include=FALSE}
+# Tabla cruzada con el mismo estilo de las demás tablas del documento.
+# tipo = "conteo" -> frecuencias absolutas con totales marginales
+# tipo = "perfil" -> perfiles de fila en porcentaje (composición de var2 dentro de var1)
+tabla_cruzada <- function(var1, var2, tipo = "conteo", titulo = NULL,
+                          fuente = fuente_edits, font_size = 9) {
+  t <- table(datos[[var1]], datos[[var2]])
+  if (tipo == "conteo") {
+    m  <- addmargins(t)
+    df <- as.data.frame.matrix(m)
+    df[] <- lapply(df, fmt_i)
+    rn <- rownames(m); rn[length(rn)] <- "Total"
+    cols <- c(etq(var1), colnames(m)); cols[length(cols)] <- "Total"
+  } else {
+    m   <- round(prop.table(t, 1) * 100, 1)
+    tot <- rowSums(m)
+    df  <- as.data.frame.matrix(m)
+    df[] <- lapply(df, fmt_p)
+    df[["Total"]] <- fmt_p(tot)
+    rn   <- rownames(m)
+    cols <- c(etq(var1), colnames(m), "Total")
+  }
+  df <- cbind(Categoria = rn, df)
+  if (is.null(titulo)) {
+    titulo <- if (tipo == "conteo")
+      paste0("Tabla cruzada de frecuencias absolutas — ", etq(var1), " x ", etq(var2))
+    else
+      paste0("Perfiles de fila en porcentaje — ", etq(var1), " x ", etq(var2))
+  }
+  kbl(df, format = "latex", booktabs = TRUE, longtable = TRUE, row.names = FALSE,
+      col.names = cols, caption = titulo,
+      align = c("l", rep("r", ncol(df) - 1)), linesep = "", escape = TRUE) |>
+    kable_styling(latex_options = c("striped", "repeat_header", "HOLD_position"),
+                  font_size = font_size, full_width = FALSE,
+                  stripe_color = "gray!8", position = "center") |>
+    row_spec(0, bold = TRUE, color = "white", background = "#404040") |>
+    row_spec(nrow(df), hline_after = FALSE) |>
+    footnote(general = fuente, general_title = "",
+             footnote_as_chunk = TRUE, threeparttable = TRUE)
+}
+
+# Diagrama de barras comparativas: barras apiladas al 100% con los perfiles de fila,
+# en horizontal para que SECTOR (23 categorías) siga cabiendo dentro de la página.
+analisis_bivariado_cual <- function(var1, var2, min_etiqueta = 6) {
+  t  <- table(datos[[var1]], datos[[var2]])
+  pr <- prop.table(t, 1) * 100
+  df <- as.data.frame(pr, stringsAsFactors = FALSE)
+  names(df) <- c("cat1", "cat2", "pct")
+  n_fil <- rowSums(t)
+  ord <- names(sort(n_fil, decreasing = FALSE))
+  df$cat1_lab <- paste0(df$cat1, " (n=", fmt_i(n_fil[df$cat1]), ")")
+  df$cat1_lab <- factor(df$cat1_lab,
+                        levels = paste0(ord, " (n=", fmt_i(n_fil[ord]), ")"))
+  df$cat2 <- factor(df$cat2, levels = colnames(t))
+  df$etiqueta <- ifelse(df$pct >= min_etiqueta, fmt_p(df$pct, 1), "")
+
+  # reverse = TRUE hace que los segmentos se apilen en el mismo orden en que aparecen
+  # en la leyenda, de modo que ambas lecturas coincidan.
+  p_barras <- ggplot(df, aes(x = cat1_lab, y = pct, fill = cat2)) +
+    geom_col(width = 0.78, color = "white", linewidth = 0.25,
+             position = position_stack(reverse = TRUE)) +
+    geom_text(aes(label = etiqueta),
+              position = position_stack(vjust = 0.5, reverse = TRUE),
+              size = 2.5, color = "white", fontface = "bold") +
+    coord_flip() +
+    scale_fill_manual(values = paleta_cual(ncol(t)), name = etq(var2)) +
+    scale_y_continuous(expand = c(0, 0), breaks = seq(0, 100, 20),
+                       labels = function(x) paste0(x, "%")) +
+    labs(title = envolver(paste0("Composición de ", etq(var2), " según ", etq(var1))),
+         subtitle = paste0("Barras comparativas al 100% · las cifras son % de fila · n = ",
+                           fmt_i(sum(t))),
+         x = etq(var1), y = "Participación dentro de cada categoría") +
+    tema_graficas +
+    theme(legend.position = "bottom",
+          legend.title = element_text(face = "bold", size = 8.5),
+          legend.text  = element_text(size = 8),
+          legend.key.size = unit(0.40, "cm"),
+          panel.grid.major.y = element_blank(),
+          axis.text.y = element_text(size = 8))
+
+  list(tabla = t, p_barras = p_barras)
+}
+
+pares_cualitativos <- combn(vars_cualitativas, 2, simplify = FALSE)
+res_biv_cual <- setNames(
+  lapply(pares_cualitativos, function(p) analisis_bivariado_cual(p[1], p[2])),
+  sapply(pares_cualitativos, function(p) paste(p[1], p[2], sep = "_x_"))
+)
+```
+
+```{r funcion-correlacion-regresion, include=FALSE}
+interpreta_r <- function(r) {
+  a <- abs(r)
+  d <- if (r >= 0) "positiva" else "negativa"
+  f <- if (a < 0.20) "muy débil" else if (a < 0.40) "débil" else
+       if (a < 0.60) "moderada" else if (a < 0.80) "fuerte" else "muy fuerte"
+  paste(f, d)
+}
+
+tabla_correlacion <- function(obj, fuente = fuente_edits) {
+  ct <- obj$correlacion
+  r  <- unname(ct$estimate)
+  p  <- ct$p.value
+  t <- data.frame(
+    Medida = c("Coeficiente de correlación de Pearson (r)",
+               "Coeficiente de determinación (r2)",
+               "Estadístico t", "Grados de libertad", "Valor p",
+               "IC 95% - límite inferior", "IC 95% - límite superior",
+               "Observaciones (n)", "Intensidad y sentido"),
+    Valor = c(fmt_p(r, 4), fmt_p(r^2, 4), fmt_p(unname(ct$statistic), 3),
+              fmt_i(unname(ct$parameter)),
+              ifelse(p < 0.001, "< 0,001", fmt_p(p, 4)),
+              fmt_p(ct$conf.int[1], 4), fmt_p(ct$conf.int[2], 4),
+              fmt_i(unname(ct$parameter) + 2), interpreta_r(r)),
+    stringsAsFactors = FALSE)
+  kbl(t, format = "latex", booktabs = TRUE, longtable = TRUE, row.names = FALSE,
+      col.names = c("Medida", "Valor"),
+      caption = paste0("Correlación de Pearson — ", etq(obj$var1), " x ", etq(obj$var2)),
+      align = c("l", "r"), linesep = "", escape = TRUE) |>
+    kable_styling(latex_options = c("striped", "repeat_header", "HOLD_position"),
+                  font_size = 10, full_width = FALSE, stripe_color = "gray!8",
+                  position = "center") |>
+    row_spec(0, bold = TRUE, color = "white", background = "#404040") |>
+    row_spec(nrow(t), hline_after = FALSE) |>
+    footnote(general = fuente, general_title = "",
+             footnote_as_chunk = TRUE, threeparttable = TRUE)
+}
+
+tabla_regresion <- function(obj, fuente = fuente_edits) {
+  s  <- summary(obj$modelo)
+  co <- s$coefficients
+  pv <- function(p) ifelse(p < 0.001, "< 0,001", fmt_p(p, 4))
+  t <- data.frame(
+    Medida = c("Intercepto (b0)", "Pendiente (b1)", "Error estándar de b1",
+               "Estadístico t de b1", "Valor p de b1", "R2", "R2 ajustado",
+               "Error estándar residual", "Estadístico F", "Valor p del modelo"),
+    Valor = c(formatC(co[1, 1], format = "f", digits = 2, big.mark = ".", decimal.mark = ","),
+              formatC(co[2, 1], format = "g", digits = 5, decimal.mark = ","),
+              formatC(co[2, 2], format = "g", digits = 4, decimal.mark = ","),
+              fmt_p(co[2, 3], 3), pv(co[2, 4]),
+              fmt_p(s$r.squared, 4), fmt_p(s$adj.r.squared, 4),
+              formatC(s$sigma, format = "f", digits = 2, big.mark = ".", decimal.mark = ","),
+              fmt_p(unname(s$fstatistic[1]), 2),
+              pv(pf(s$fstatistic[1], s$fstatistic[2], s$fstatistic[3], lower.tail = FALSE))),
+    stringsAsFactors = FALSE)
+  kbl(t, format = "latex", booktabs = TRUE, longtable = TRUE, row.names = FALSE,
+      col.names = c("Elemento del modelo", "Valor"),
+      caption = paste0("Regresión lineal simple — ", etq(obj$var2),
+                       " en función de ", etq(obj$var1)),
+      align = c("l", "r"), linesep = "", escape = TRUE) |>
+    kable_styling(latex_options = c("striped", "repeat_header", "HOLD_position"),
+                  font_size = 10, full_width = FALSE, stripe_color = "gray!8",
+                  position = "center") |>
+    row_spec(0, bold = TRUE, color = "white", background = "#404040") |>
+    row_spec(nrow(t), hline_after = FALSE) |>
+    footnote(general = fuente, general_title = "",
+             footnote_as_chunk = TRUE, threeparttable = TRUE)
+}
+
+mapa_calor_correlaciones <- function(vars = vars_cuantitativas) {
+  m  <- cor(datos[, vars], use = "complete.obs", method = "pearson")
+  df <- expand.grid(Var1 = vars, Var2 = vars, stringsAsFactors = FALSE)
+  df$r <- as.vector(m)
+  df$Var1 <- factor(etq(df$Var1), levels = etq(vars))
+  df$Var2 <- factor(etq(df$Var2), levels = rev(etq(vars)))
+  df$etiqueta <- fmt_p(df$r, 3)
+
+  ggplot(df, aes(x = Var1, y = Var2, fill = r)) +
+    geom_tile(color = "white", linewidth = 0.9) +
+    geom_text(aes(label = etiqueta, color = abs(r) > 0.6),
+              size = 3.1, fontface = "bold", show.legend = FALSE) +
+    scale_color_manual(values = c("TRUE" = "white", "FALSE" = "#1a2b4c")) +
+    scale_fill_gradient2(low = "#B2182B", mid = "white", high = "#2C5F7F",
+                         midpoint = 0, limits = c(-1, 1), name = "r de\nPearson") +
+    labs(title = envolver("Mapa de calor de los coeficientes de correlación de Pearson"),
+         subtitle = paste0("Variables cuantitativas · n = ", fmt_i(nrow(datos))),
+         x = NULL, y = NULL) +
+    tema_graficas +
+    theme(legend.position = "right",
+          legend.title = element_text(face = "bold", size = 8.5),
+          legend.text  = element_text(size = 8),
+          legend.key.width = unit(0.35, "cm"),
+          panel.grid = element_blank(),
+          axis.text.x = element_text(angle = 25, hjust = 1, size = 8),
+          axis.text.y = element_text(size = 8))
+}
+```
+
+## 4.1 Análisis univariado
+
+### 4.1.1 Variables cualitativas
+<!-- Las tablas de frecuencias para las variables cualilativas llevan: -->
+<!-- Categoría -->
+<!-- fi - Frecuencias absolutas -->
+<!-- hi - Frecuencias relativas (fi / n) -->
+<!-- Fi - Frecuencias acumuladas -->
+<!-- Hi - Frecuencias relativas acum -->
+
+Dentro de las variables cualitativas se encuentran 5, siendo estas **Sector**, **Tipología**, **Certificación**, **Propietario** y **Gerente**, todas de naturaleza nominal, de modo que el análisis no busca ordenar ni promediar categorías sino describir cómo se reparten las 4.002 empresas de la muestra entre ellas y qué tan concentrada o dispersa resulta esa distribución.
+
+Para lograr lo anterior, cada variable se acompaña de **A) Tabla de frecuencia** con las frecuencias absolutas y relativas junto con sus acumuladas, **B) Diagrama de barras** que permite comparar directamente el número de empresas de cada categoría, y **C) Diagrama de sectores** que muestra la participación porcentual de cada una sobre el total, de manera que la concentración de la muestra pueda leerse tanto en términos de conteo como de composición.
+
+Las barras se presentan en orientación horizontal porque **Sector** tiene 23 categorías y **Propietario** rótulos extensos, de forma que las etiquetas se mantengan legibles y la figura no se salga de los márgenes de la página; por la misma razón, cuando una variable supera las ocho categorías el diagrama de sectores agrupa la cola de categorías menores en un único segmento, mientras que la tabla de frecuencia conserva siempre el detalle completo.
+
+#### 4.1.1.1 Sector
+
+La variable corresponde al código CIIU4, la cual identifica la actividad económica en la que compite cada empresa, por lo que su distribución indica sobre qué ramas del sector servicios y comercio se concentra efectivamente la muestra y, en consecuencia, sobre qué actividades puede sostenerse una lectura con suficiente número de casos y sobre cuáles conviene ser prudente.
+
+Los valores se presentan con el código numérico tal como aparece en el conjunto de microdatos, ya que el diccionario del proyecto documenta únicamente cuatro equivalencias a título de ejemplo (47 = Comercio al por menor, 46 = Comercio al por mayor, 62 = Desarrollo de sistemas informáticos y 86 = Actividades de atención de la salud humana) y los insumos entregados no incluyen la tabla completa de nombres CIIU4 para las 23 categorías observadas.
+
+Esta lectura es el punto de partida del primer objetivo específico, referido a describir la distribución de ingresos y de tamaño del personal entre las distintas actividades económicas, porque define cuáles de esas actividades tienen respaldo muestral suficiente.
+
+##### A. Tabla de frecuencia
+
+La tabla ordena las 23 actividades de mayor a menor número de empresas e incorpora las frecuencias acumuladas, lo que permite cuantificar con precisión qué proporción de la muestra se alcanza al sumar las primeras actividades.
+
+```{r sector-tabla, results='asis'}
+tabla_frec(res_cual$SECTOR$tabla, "Tabla de frecuencias — Sector (CIIU4)",
+           tipo = "cualitativa")
+```
+
+La muestra está fuertemente concentrada: las cuatro primeras actividades (47, 46, 86 y 492) reúnen 2.855 empresas, es decir el 71,34% del total, y las nueve primeras acumulan el 88,56%, de modo que las catorce actividades restantes apenas representan el 11,44%. En el extremo inferior aparecen actividades con muy pocos registros, como la 60 con 9 empresas y la 641 con 5, cuyos porcentajes deben leerse con cautela porque un solo caso modifica de forma apreciable su perfil.
+
+##### B. Diagrama de barras
+
+El diagrama de barras compara el número absoluto de empresas por actividad y acompaña cada barra con su porcentaje, con el fin de visualizar la magnitud de la diferencia entre las actividades dominantes y la cola de actividades con poca presencia.
+
+```{r sector-barras, fig.height=5.4}
+res_cual$SECTOR$p_barras
+```
+
+La gráfica confirma una distribución muy desigual: el comercio al por menor (47, con 889 empresas) y el comercio al por mayor (46, con 824) duplican largamente a cualquier otra actividad, seguidos por la 86 (581) y la 492 (561); a partir de la actividad 45 las barras caen por debajo de las 150 empresas y se mantienen en ese rango hasta el final. Esto implica que cualquier resultado agregado de la muestra estará dominado por el comercio y por esas dos actividades de servicios, un sesgo que debe tenerse presente al interpretar los cruces posteriores.
+
+##### C. Diagrama de sectores
+
+El diagrama de sectores traduce la misma información a participaciones porcentuales sobre el total, agrupando las dieciséis actividades más pequeñas en un único segmento para que las participaciones principales se mantengan legibles.
+
+```{r sector-pie, fig.height=3.6}
+res_cual$SECTOR$p_pie
+```
+
+En términos de composición, siete actividades concentran el 82,2% de la muestra y las dieciséis restantes se reparten el 17,8%, lo que ratifica que el conjunto investigado no es un reparto equilibrado entre ramas económicas sino una muestra dominada por el comercio (47 y 46 suman por sí solas el 42,8%). El aporte de esta lectura es delimitar el alcance del análisis: las conclusiones por actividad económica son sólidas para esas siete categorías y meramente indicativas para el resto.
+
+#### 4.1.1.2 Tipología
+
+La variable corresponde al código TIPOLO, la cual clasifica a cada empresa según su tipología de innovación en el periodo de referencia, distinguiendo entre innovadora en sentido amplio (AMPLIA), innovadora en sentido estricto (ESTRIC), con intención de innovar (INTENC), potencialmente innovadora (POTENC) y no innovadora (NOINNO).
+
+Es la variable que organiza directamente la pregunta del estudio, porque separa a las empresas que obtuvieron algún resultado de innovación de aquellas que no lo hicieron, y además fue la variable usada como estrato en el muestreo, según se documenta en los datos de referencia del dataset final.
+
+Su análisis permite avanzar en el segundo objetivo específico, relativo a identificar qué tipología concentra la mayor proporción de empresas con inversión, al fijar primero cuál es el peso de cada tipología en el conjunto.
+
+##### A. Tabla de frecuencia
+
+La tabla cuantifica cuántas empresas pertenecen a cada tipología y qué proporción del total representan, lo que permite dimensionar de entrada qué tan extendido está el fenómeno de la innovación en la muestra.
+
+```{r tipologia-tabla, results='asis'}
+tabla_frec(res_cual$TIPOLOGIA$tabla, "Tabla de frecuencias — Tipología de innovación",
+           tipo = "cualitativa")
+```
+
+El resultado es contundente: 2.737 empresas (68,39%) son no innovadoras, mientras que 988 (24,69%) son innovadoras en sentido amplio y apenas 4 (0,10%) lo son en sentido estricto. Las categorías intermedias son marginales, con 137 empresas potencialmente innovadoras (3,42%) y 136 con intención de innovar (3,40%). En conjunto, solo 992 empresas (24,79%) alcanzaron algún resultado efectivo de innovación.
+
+##### B. Diagrama de barras
+
+El diagrama de barras permite comparar visualmente la magnitud de cada tipología y, en particular, dimensionar la distancia entre la categoría no innovadora y todas las demás.
+
+```{r tipologia-barras, fig.height=2.9}
+res_cual$TIPOLOGIA$p_barras
+```
+
+La barra de NOINNO casi triplica a la de AMPLIA y deja a las tres categorías restantes reducidas a trazos mínimos, lo que evidencia que la innovación no es la situación habitual en estos sectores sino la excepción. El caso de ESTRIC, con solo 4 empresas, es particularmente relevante en términos metodológicos: esa categoría no admite ningún análisis estadístico propio y, cuando aparezca en los cruces posteriores, sus porcentajes deberán leerse como meramente descriptivos de esos cuatro casos.
+
+##### C. Diagrama de sectores
+
+El diagrama de sectores muestra la composición porcentual de la muestra según tipología, de modo que el peso relativo de las empresas innovadoras frente a las no innovadoras quede expresado como participación sobre el total.
+
+```{r tipologia-pie, fig.height=3.3}
+res_cual$TIPOLOGIA$p_pie
+```
+
+Algo más de dos terceras partes de la muestra (68,4%) corresponde a empresas no innovadoras y aproximadamente una cuarta parte (24,7%) a innovadoras en sentido amplio, mientras que las categorías intermedias no superan el 3,5% cada una. El aporte de esta lectura al análisis es establecer la línea base contra la cual se comparará todo lo demás: si una característica eleva la proporción de innovadoras por encima del 24,7% observado en el total, puede considerarse un rasgo asociado a mayor propensión a innovar.
+
+#### 4.1.1.3 Certificación
+
+La variable corresponde al código VI6R1C1, la cual indica si la empresa obtuvo certificaciones de calidad de proceso durante el periodo de referencia, de modo que opera como una aproximación al grado de formalización y madurez de la gestión interna.
+
+Su interés radica en que la certificación es una decisión sobre la que una organización sí puede actuar deliberadamente, a diferencia de su tamaño o de su actividad económica, por lo que su distribución y sus cruces posteriores aportan directamente al tercer objetivo específico, referido a comparar ingresos e inversión en innovación entre empresas con y sin certificación.
+
+##### A. Tabla de frecuencia
+
+La tabla cuantifica cuántas empresas declararon haber obtenido certificaciones de calidad de proceso frente a las que no lo hicieron, estableciendo qué tan común es esta práctica en la muestra.
+
+```{r certificacion-tabla, results='asis'}
+tabla_frec(res_cual$CERTIFICACION$tabla, "Tabla de frecuencias — Certificación de calidad",
+           tipo = "cualitativa")
+```
+
+La certificación es claramente minoritaria: 3.588 empresas (89,66%) no obtuvieron certificaciones de calidad de proceso y solo 414 (10,34%) sí lo hicieron, de manera que aproximadamente una de cada diez empresas de la muestra cuenta con este rasgo.
+
+##### B. Diagrama de barras
+
+El diagrama de barras contrasta el número de empresas en cada una de las dos categorías, haciendo explícita la asimetría entre ambos grupos.
+
+```{r certificacion-barras, fig.height=2.4}
+res_cual$CERTIFICACION$p_barras
+```
+
+La diferencia entre las dos barras es de casi nueve veces, lo que confirma que la certificación de calidad de proceso constituye un rasgo distintivo de una minoría de empresas y no una práctica generalizada en los sectores de servicios y comercio. Esto hace que el grupo certificado sea precisamente interesante como objeto de comparación, aunque su tamaño reducido obliga a ser prudente al desagregarlo por actividad económica.
+
+##### C. Diagrama de sectores
+
+El diagrama de sectores expresa la misma relación como participación porcentual, de modo que el peso del grupo certificado quede dimensionado sobre el total de la muestra.
+
+```{r certificacion-pie, fig.height=3.0}
+res_cual$CERTIFICACION$p_pie
+```
+
+El 89,7% de la muestra no está certificada frente a un 10,3% que sí lo está, proporción que servirá como referencia en el análisis bivariado: cuando un subgrupo supere ese 10,3%, podrá afirmarse que la certificación es más frecuente allí que en el conjunto de la muestra.
+
+#### 4.1.1.4 Propietario
+
+La variable corresponde al código VIII1R1C1, la cual identifica quién es la persona propietaria o mayor accionista de la empresa a diciembre del segundo año del periodo, distinguiendo entre el fundador o fundadora, un familiar del fundador o fundadora, y otro tipo de propietario.
+
+Esta variable describe la estructura de propiedad y, junto con **Gerente**, permite caracterizar el grado de control familiar sobre la empresa, lo que aporta directamente al cuarto objetivo específico, referido a determinar qué tipo de propietario presenta mayor propensión a invertir en actividades de innovación.
+
+##### A. Tabla de frecuencia
+
+La tabla cuantifica cómo se reparte la propiedad de las empresas entre las tres categorías previstas, estableciendo qué tan extendida está la propiedad fundacional o familiar en la muestra.
+
+```{r propietario-tabla, results='asis'}
+tabla_frec(res_cual$PROPIETARIO$tabla, "Tabla de frecuencias — Propietario",
+           tipo = "cualitativa")
+```
+
+La propiedad sigue en manos del fundador o fundadora en 1.998 empresas (49,93%), corresponde a otro tipo de propietario en 1.335 (33,36%) y a un familiar del fundador en 669 (16,72%). Sumando las dos categorías de origen familiar, 2.667 empresas (66,64%) permanecen bajo propiedad del fundador o de su familia.
+
+##### B. Diagrama de barras
+
+El diagrama de barras compara el número de empresas en cada forma de propiedad y permite apreciar la distancia entre la propiedad fundacional y las demás configuraciones.
+
+```{r propietario-barras, fig.height=2.6}
+res_cual$PROPIETARIO$p_barras
+```
+
+La categoría del fundador o fundadora prácticamente duplica a la de otro propietario y triplica a la de familiar del fundador, lo que indica que la muestra está compuesta mayoritariamente por empresas que siguen en manos de quien las creó. Esta composición es relevante porque la decisión de invertir en innovación se concentra, en la mitad de la muestra, en una sola figura, un rasgo que podrá contrastarse en el análisis bivariado.
+
+##### C. Diagrama de sectores
+
+El diagrama de sectores presenta la composición porcentual de la estructura de propiedad sobre el total de la muestra.
+
+```{r propietario-pie, fig.height=3.1}
+res_cual$PROPIETARIO$p_pie
+```
+
+Prácticamente la mitad de la muestra (49,9%) pertenece al fundador o fundadora, un tercio (33,4%) a otro propietario y un sexto (16,7%) a un familiar del fundador, de modo que dos de cada tres empresas conservan propiedad de origen familiar. El aporte de esta lectura es fijar el punto de partida para evaluar si el paso hacia la categoría de otro propietario se asocia o no con mayor presencia de certificación e innovación.
+
+#### 4.1.1.5 Gerente
+
+La variable corresponde al código VIII2R1C1, la cual indica si quien gerencia la empresa es el mismo fundador o fundadora, o un familiar del fundador, de manera que complementa a **Propietario** al describir no ya quién es dueño sino quién dirige efectivamente la organización.
+
+La distinción es relevante porque una empresa puede seguir siendo propiedad familiar y, aun así, haber delegado la gerencia en una persona ajena a la familia, cambio que suele asociarse con la profesionalización de la gestión y que forma parte del cuarto objetivo específico.
+
+##### A. Tabla de frecuencia
+
+La tabla cuantifica en cuántas empresas la gerencia continúa en manos del fundador o de un familiar suyo, frente a aquellas donde la dirección recae en una persona ajena a ese círculo.
+
+```{r gerente-tabla, results='asis'}
+tabla_frec(res_cual$GERENTE$tabla, "Tabla de frecuencias — Gerencia fundador/familiar",
+           tipo = "cualitativa")
+```
+
+En 2.337 empresas (58,40%) la gerencia está a cargo del fundador o de un familiar del fundador, mientras que en 1.665 (41,60%) la dirección corresponde a una persona ajena a ese círculo, de modo que el reparto es mucho más equilibrado que el observado en la estructura de propiedad.
+
+##### B. Diagrama de barras
+
+El diagrama de barras compara ambos grupos en número de empresas, mostrando qué tan cerca o lejos están entre sí.
+
+```{r gerente-barras, fig.height=2.4}
+res_cual$GERENTE$p_barras
+```
+
+La diferencia entre las dos barras es de 672 empresas, una brecha moderada que contrasta con la fuerte asimetría observada en certificación. Lo que esto aporta al análisis es que la gerencia familiar, aunque mayoritaria, no es tan dominante como la propiedad familiar: existe un conjunto amplio de empresas que ya delegaron la dirección.
+
+##### C. Diagrama de sectores
+
+El diagrama de sectores expresa esa misma relación en términos de participación porcentual sobre el total de la muestra.
+
+```{r gerente-pie, fig.height=3.0}
+res_cual$GERENTE$p_pie
+```
+
+El 58,4% de las empresas mantiene gerencia del fundador o de un familiar y el 41,6% la ha delegado, proporción que servirá de referencia para evaluar, en el análisis bivariado, si el esquema de gerencia se relaciona con la estructura de propiedad y con la tipología de innovación.
+
+### 4.1.2 Variables cuantitativas
+Dentro de las variables cuantitativas se encuentran 5 siendo estas  **Ingresos**, **Inversión I+D interna**, **Inversión TIC**, **Inversión formación** y **Personal**, cuyas unidades para las primeras 4 estan en miles de pesos corrientes y número de personas en la última, de modo que el análisis busca explicar como se encuentra la escala económica, la intensidad de inversión y el tamaño del empleo.
+
+Para lograr lo anterior, el análisis cuantitativo combinará un conjunto de recursos descriptivos que incluye **A) Tabla de frecuencias** con intervalos de igual amplitud definidos para cada variable, **B) Histograma**, **C) Polígono de frecuencias**, **D) Curva de densidad Kernel**, **E) Ojiva de frecuencias acumuladas**, **F) Diagrama de caja y bigotes**, **G) Medidas de tendencia central y de dispersión**, y **H) Diagrama de tallo y hojas**, de modo que la lectura no se limite a un solo resumen sino que permita observar forma, dispersión, acumulación y valores atípicos.
+
+En las tablas, **Intervalo** identifica el rango de cada clase, **Clase Media** es su punto medio, **fi** y **hi** son las frecuencias absoluta y relativa, y **Fi** y **Hi** sus acumuladas, mientras que en las gráficas y resúmenes se complementa la lectura de la dispersión y de la asimetría, buscando alinearse con los objetivos especificos referenciando la comparación de los ingresos y del personal entre las diferentes actividades, contrastando las empresas con y sin certificación, explorando la relación entre tamaño, ingresos e inversión.
+
+
+#### 4.1.2.1 Ingresos
+
+La variable corresponde al código I3R2C1, la cual registra sus valores en miles de pesos corrientes de las ventas nacionales totales de las empresas en 2021, por lo que su análisis permite aproximar la escala económica de las unidades y examinar si los valores se concentran en pocos rangos o si existen diferencias marcadas entre actividades económicas.
+
+Como es una magnitud monetaria continua, es importante la revisión de su asimetría, su curtosis y la presencia de valores atípicos, además de complementar el promedio con la mediana y los cuantiles para no depender de una sola medida de tendencia central.
+
+También es importante conocer si existen ingresos iguales a cero y cómo deben ser tratados, ya que para estos casos se pueden ver reflejadas empresas sin ingresos reportados o situaciones particulares que deben quedar explícitas antes de relacionar o cruzar esta variable con **Personal**, **Inversión I+D interna**, **Inversión TIC** o **Inversión formación**.
+
+Esta lectura permite llegar a describir la distribución de los ingresos entre las actividades del sector servicios y comercio, con el objetivo específico de conocer la relación que existe entre tamaño, ingresos e inversión.
+
+##### A. Tabla de Frecuencias
+
+La tabla agrupa los ingresos en seis intervalos de igual amplitud sobre todo el recorrido de la variable, con el fin de observar en cuáles de esos rangos se sitúan las empresas y qué tan rápido se acumula la frecuencia.
+
+```{r ingresos-tabla, results='asis', echo=FALSE}
+tabla_frec(res_cuant$INGRESOS$tabla, "Tabla de frecuencias — Ingresos")
+```
+
+La concentración es extrema: 3.948 empresas (98,65%) caen en el primer intervalo, que va de 0 a 766.897.148 miles de pesos, mientras que los cinco intervalos restantes reúnen apenas 54 empresas. Esto significa que los intervalos de igual amplitud, aplicados a una variable con un máximo de 4.601.382.887 miles de pesos, no logran discriminar dentro del grupo mayoritario, razón por la cual las gráficas siguientes recurren a la escala logarítmica para hacer visible la estructura interna de ese primer intervalo.
+
+##### B. Histograma
+
+El histograma representa la densidad de empresas en cada intervalo de la tabla anterior y sitúa la media y la mediana sobre el mismo eje, buscando mostrar hasta qué punto ambas medidas se separan cuando la distribución es muy asimétrica.
+
+```{r ingresos-hist}
+res_cuant$INGRESOS$p_hist
+```
+
+La figura está dominada por una sola barra en el extremo izquierdo y por cinco barras prácticamente nulas, imagen característica de una distribución con asimetría positiva severa. La media (73.232.037) queda muy por encima de la mediana (14.578.768), es decir, cinco veces mayor, lo que confirma que un grupo reducido de empresas de gran facturación arrastra el promedio hacia arriba y que la mediana es la medida de tendencia central apropiada para describir a la empresa típica de la muestra.
+
+##### C. Polígono de Frecuencias
+
+El polígono une los puntos medios de cada intervalo y se traza sobre escala logarítmica, con el propósito de observar la forma general de la distribución sin que el primer intervalo absorba toda la figura.
+
+```{r ingresos-poligono}
+res_cuant$INGRESOS$p_poligono
+```
+
+El polígono desciende de forma abrupta desde el primer punto medio y se mantiene pegado al eje en el resto del recorrido, sin ningún repunte intermedio. Esto indica que no existen grupos diferenciados de empresas de ingresos altos, sino una única masa concentrada en los valores bajos con una cola continua y cada vez más delgada hacia los valores altos.
+
+##### D. Curva de Densidad (Kernel)
+
+La curva de densidad suaviza el histograma y permite apreciar la forma de la distribución sin depender de la elección de intervalos, lo que resulta útil para identificar si existe una o varias concentraciones de empresas.
+
+```{r ingresos-densidad}
+res_cuant$INGRESOS$p_densidad
+```
+
+La curva presenta un único máximo muy pronunciado cerca del origen y decae rápidamente, sin modas secundarias, lo que confirma que la muestra es unimodal y que la heterogeneidad de ingresos se expresa como una cola larga y no como la coexistencia de varios grupos de tamaño comparable.
+
+##### E. Ojiva (Frecuencias Acumuladas)
+
+La ojiva muestra cómo se acumula el número de empresas a medida que aumenta el nivel de ingresos, lo que permite leer directamente qué proporción de la muestra se alcanza en cada umbral.
+
+```{r ingresos-ojiva}
+res_cuant$INGRESOS$p_ojiva
+```
+
+La curva alcanza prácticamente su techo en el primer tramo y luego avanza de forma casi horizontal hasta el máximo, reflejando que el 98,65% de la muestra se acumula antes de los 766.897.148 miles de pesos. En términos prácticos, esto significa que superar esa cifra sitúa a una empresa dentro del 1,35% de mayor facturación de la muestra.
+
+##### F. Diagrama de Caja y Bigotes (Boxplot)
+
+El diagrama de caja resume la posición, la dispersión y los valores atípicos de los ingresos; se presenta en escala logarítmica, de modo que la caja y los bigotes se calculan sobre los valores transformados y las 53 empresas con ingresos iguales a cero quedan excluidas por no ser representables en esa escala.
+
+```{r ingresos-box, fig.height=3.2}
+res_cuant$INGRESOS$p_box
+```
+
+Una vez tomada la escala logarítmica, la distribución se vuelve aproximadamente simétrica, con la mediana en el centro de la caja y bigotes de longitud comparable, y aparecen valores atípicos en ambos extremos. Esta es la lectura más informativa de la variable: los ingresos no son erráticos, sino que siguen un patrón regular en términos de orden de magnitud, de forma que las diferencias entre empresas deben interpretarse de manera multiplicativa y no aditiva.
+
+##### G. Medidas de Tendencia Central y de Dispersión
+
+La tabla reúne las medidas de posición, dispersión y forma de la variable, con el fin de cuantificar lo que las gráficas anteriores mostraron de manera visual.
+
+```{r ingresos-medidas, results='asis', echo=FALSE}
+tabla_medidas(res_cuant$INGRESOS$medidas, "Medidas descriptivas — Ingresos")
+```
+
+Las cifras confirman la lectura anterior: el coeficiente de variación alcanza el 395,11%, la asimetría es de 11,12 y la curtosis de 148,10, valores que describen una distribución extremadamente desigual y con colas muy pesadas. El rango intercuartílico (35.835.339) es pequeño frente al rango total (4.601.382.887), lo que muestra que la mitad central de las empresas es relativamente homogénea y que toda la dispersión proviene del 25% superior.
+
+##### H. Diagrama de Tallo y Hojas (Stem and Leaf)
+
+El diagrama de tallo y hojas presenta los valores individuales conservando sus dígitos, de modo que la distribución pueda leerse sin perder el detalle de cada observación; se construye sobre el logaritmo en base 10 de los ingresos y excluye los valores iguales a cero.
+
+```{r ingresos-stem, results='asis', echo=FALSE}
+mostrar_tallo_hojas(res_cuant$INGRESOS)
+```
+
+Las hojas se concentran en los tallos correspondientes a los órdenes de magnitud intermedios y se vuelven escasas en los extremos, reproduciendo la forma aproximadamente simétrica que ya mostraba el boxplot en escala logarítmica. Su aporte es mostrar que la transición entre empresas pequeñas y grandes es gradual y continua, sin saltos ni vacíos que sugieran la existencia de grupos separados.
+
+
+#### 4.1.2.2 Inversión ID interna
+
+La variable corresponde al código II1R1C2, la cual cuantifica en miles de pesos corrientes los recursos destinados a actividades de investigación y desarrollo dentro de las empresas durante 2021, de manera que su análisis debe distinguir entre las organizaciones que no reportan inversión y aquellas que sí registran montos positivos, debido a que ambos escenarios llegan a responder lógicas diferentes.
+
+El análisis debe lograr el reporte de la frecuencia existente de ceros, la proporción de empresas con inversión positiva y entre estas últimas, las medidas de tendencia central, de dispersión y de valores atípicos, ya que la variabilidad de los montos positivos suele ser alta y suele estar influida por unas pocas empresas de gran tamaño.
+
+Llegando a la posibilidad de entrar al detalle sobre la caracterización de la tipología de innovación asociada a I+D interna, en la comparación de las empresas con y sin certificación y en la exploración de la relación de los ingresos, con el personal ocupado.
+
+##### A. Tabla de Frecuencias
+
+La tabla reparte los montos de I+D interna en diez intervalos de igual amplitud, con el fin de establecer cuántas empresas no registran inversión y cómo se distribuyen las que sí la registran.
+
+```{r inversion-id-tabla, results='asis', echo=FALSE}
+tabla_frec(res_cuant$INV_ID$tabla, "Tabla de frecuencias — Inversión I+D interna")
+```
+
+El primer intervalo concentra 3.979 empresas (99,43%), cifra que incluye las 3.718 empresas (92,90%) que reportan inversión igual a cero. Solo 284 empresas (7,10%) destinaron algún monto a I+D interna, y las que superan los 2.549.343 miles de pesos son apenas 23. La lectura central es que la I+D interna no es una actividad marginal sino excepcional: más de nueve de cada diez empresas de servicios y comercio no destinaron un solo peso a esta actividad en 2021.
+
+##### B. Histograma
+
+El histograma muestra la densidad por intervalo y ubica la media y la mediana sobre el conjunto completo de empresas, de modo que se aprecie el efecto que tiene sobre estas medidas el predominio de los valores nulos.
+
+```{r inversion-id-hist}
+res_cuant$INV_ID$p_hist
+```
+
+La figura queda reducida a una sola barra en el origen, resultado directo de que el 92,90% de los registros valen cero. La mediana se sitúa en 0 y la media en 77.566 miles de pesos, de manera que el promedio describe un nivel de inversión que, en rigor, ninguna empresa típica realiza: es el reparto aritmético de la inversión de 284 empresas entre las 4.002 de la muestra.
+
+##### C. Polígono de Frecuencias
+
+El polígono se traza sobre escala logarítmica, excluyendo los ceros, para observar la forma de la distribución entre las empresas que sí invirtieron.
+
+```{r inversion-id-poligono}
+res_cuant$INV_ID$p_poligono
+```
+
+El polígono cae verticalmente desde el primer punto y permanece en cero a lo largo de todo el recorrido, sin ningún tramo intermedio apreciable. Esto confirma que la variable no tiene una distribución continua en el sentido habitual, sino que combina una acumulación masiva en cero con una cola muy delgada de montos positivos muy dispersos.
+
+##### D. Curva de Densidad (Kernel)
+
+La curva de densidad se calcula únicamente sobre las 284 empresas con inversión positiva, con el propósito de describir cómo se distribuyen los montos cuando efectivamente existe inversión.
+
+```{r inversion-id-densidad}
+res_cuant$INV_ID$p_densidad
+```
+
+Entre quienes invierten, la media (1.093.025 miles de pesos) multiplica por once a la mediana (99.575), lo que señala que incluso dentro del grupo que invierte la distribución es extremadamente desigual. La densidad presenta un único máximo próximo al origen y una cola que se extiende hasta los 25.493.428 miles de pesos del máximo observado.
+
+##### E. Ojiva (Frecuencias Acumuladas)
+
+La ojiva permite leer qué proporción de empresas se acumula en cada nivel de inversión, lo que resulta especialmente ilustrativo cuando la mayor parte de la masa está en el valor cero.
+
+```{r inversion-id-ojiva}
+res_cuant$INV_ID$p_ojiva
+```
+
+La curva alcanza el 99,43% de la muestra en el primer tramo y luego avanza de forma casi plana, de modo que los nueve intervalos restantes aportan en conjunto solo 23 empresas. Esto significa que cualquier monto de I+D interna por encima de los 2,5 millones de miles de pesos sitúa a la empresa en una posición prácticamente única dentro del conjunto investigado.
+
+##### F. Diagrama de Caja y Bigotes (Boxplot)
+
+El diagrama de caja se construye en escala logarítmica sobre las 284 empresas con inversión positiva, de modo que describe la dispersión dentro del grupo que invierte y no la de la muestra completa.
+
+```{r inversion-id-box, fig.height=3.2}
+res_cuant$INV_ID$p_box
+```
+
+Dentro del grupo que invierte, la mediana se sitúa en 99.575 miles de pesos y la caja abarca varios órdenes de magnitud, con bigotes largos en ambos extremos. El aporte de esta lectura es mostrar que, aun entre las empresas que destinan recursos a I+D interna, no existe un nivel de inversión característico: los montos van desde unos pocos miles hasta más de veinticinco mil millones de miles de pesos.
+
+##### G. Medidas de Tendencia Central y de Dispersión
+
+La tabla reúne las medidas descriptivas de la variable sobre el total de la muestra, incluyendo las empresas sin inversión.
+
+```{r inversion-id-medidas, results='asis', echo=FALSE}
+tabla_medidas(res_cuant$INV_ID$medidas, "Medidas descriptivas — Inversión I+D interna")
+```
+
+La mediana, la moda, el primer y el tercer cuartil valen todos 0, lo que hace que el rango intercuartílico sea también 0: la mitad central de la muestra no invierte en absoluto. El coeficiente de variación llega al 1.233,34%, la asimetría a 17,63 y la curtosis a 349,86, valores que describen la distribución más desigual analizada hasta aquí junto con la de inversión en formación.
+
+##### H. Diagrama de Tallo y Hojas (Stem and Leaf)
+
+El diagrama de tallo y hojas se construye sobre el logaritmo en base 10 de los 284 montos positivos, con el fin de observar en qué órdenes de magnitud se sitúan las empresas que efectivamente invierten en I+D interna.
+
+```{r inversion-id-stem, results='asis', echo=FALSE}
+mostrar_tallo_hojas(res_cuant$INV_ID)
+```
+
+Las hojas se reparten a lo largo de 38 tallos, con acumulaciones visibles en los tallos 36, 37 y 39 y en el rango 50 a 53, sin una concentración única y dominante. Esta dispersión a lo largo de casi cuatro órdenes de magnitud refuerza la conclusión anterior: el grupo que invierte en I+D interna no constituye un bloque homogéneo, sino un conjunto heterogéneo de empresas con capacidades de gasto muy distintas.
+
+#### 4.1.2.3 Inversión TIC
+
+La variable corresponde al código II1R4C2, cuya información detaalla la cantidad en miles de pesos corrientes que la empresa destinó a tecnologías de la información y las comunicaciones, desarrollo de software y actividades de análisis de datos durante 2021, por lo que su distribución permite observar tanto la presencia de empresas sin inversión registrada como la dispersión de los montos positivos.
+
+También es importante conocer si estos montos se concentran en pocas empresas, si existen valores atípicos ó si la inversión en TIC se comporta de manera distinta entre actividades económicas, ya que esto aporta insumos para que la  interpretación se mantenga descriptiva y asociativa, sin asumir causalidad entre la inversión en TIC y los resultados de ventas o de innovación.
+
+##### A. Tabla de Frecuencias
+
+La tabla distribuye los montos destinados a TIC en diez intervalos de igual amplitud, con el fin de cuantificar cuántas empresas no registran inversión y cómo se reparten las que sí lo hacen.
+
+```{r inversion-tic-tabla, results='asis', echo=FALSE}
+tabla_frec(res_cuant$INV_TIC$tabla, "Tabla de frecuencias — Inversión TIC")
+```
+
+El primer intervalo agrupa 3.968 empresas (99,15%), dentro de las cuales 3.352 (83,76%) reportan inversión igual a cero. Las 650 empresas (16,24%) que sí invirtieron en TIC más que duplican a las que invirtieron en I+D interna, lo que indica que la adopción tecnológica es la forma de inversión en innovación más extendida de las tres analizadas en este estudio.
+
+##### B. Histograma
+
+El histograma muestra la densidad por intervalo sobre el total de la muestra, situando la media y la mediana para dimensionar el peso de los valores nulos.
+
+```{r inversion-tic-hist}
+res_cuant$INV_TIC$p_hist
+```
+
+De nuevo la figura se concentra en una única barra en el origen, aunque el porcentaje de ceros (83,76%) es algo más de nueve puntos menor que en I+D interna. La mediana sigue siendo 0 y la media asciende a 121.170 miles de pesos, el valor promedio más alto de las tres variables de inversión, lo que anticipa que las TIC son el rubro que concentra mayores recursos en términos agregados.
+
+##### C. Polígono de Frecuencias
+
+El polígono se traza en escala logarítmica sobre los montos positivos, con el objetivo de observar la forma de la distribución entre las empresas que sí destinaron recursos a TIC.
+
+```{r inversion-tic-poligono}
+res_cuant$INV_TIC$p_poligono
+```
+
+El perfil vuelve a ser el de una caída abrupta desde el primer punto, sin tramos intermedios relevantes, lo que confirma que el patrón de concentración en cero se repite pese a que la proporción de empresas que invierten sea mayor que en I+D interna.
+
+##### D. Curva de Densidad (Kernel)
+
+La curva de densidad se calcula sobre las 650 empresas con inversión positiva, para describir cómo se distribuyen los montos cuando la inversión existe.
+
+```{r inversion-tic-densidad}
+res_cuant$INV_TIC$p_densidad
+```
+
+Entre quienes invierten, la mediana es de 50.824 miles de pesos y la media de 746.037, es decir una relación de casi quince veces entre ambas, por lo que la asimetría dentro del grupo invertidor es incluso mayor que en I+D interna. La cola se extiende hasta los 33.332.412 miles de pesos del máximo observado.
+
+##### E. Ojiva (Frecuencias Acumuladas)
+
+La ojiva permite identificar en qué umbral de inversión se acumula la mayor parte de las empresas.
+
+```{r inversion-tic-ojiva}
+res_cuant$INV_TIC$p_ojiva
+```
+
+La acumulación alcanza el 99,15% en el primer intervalo y los nueve restantes aportan en conjunto 34 empresas, con tramos completamente planos entre los 9.999.724 y los 13.332.965 miles de pesos y entre los 19.999.447 y los 29.999.171, donde no se registra ninguna empresa. Esto muestra que los montos elevados no forman un continuo, sino casos aislados.
+
+##### F. Diagrama de Caja y Bigotes (Boxplot)
+
+El diagrama de caja se construye en escala logarítmica sobre las 650 empresas con inversión positiva, describiendo la dispersión dentro del grupo que invierte.
+
+```{r inversion-tic-box, fig.height=3.2}
+res_cuant$INV_TIC$p_box
+```
+
+La caja se extiende sobre varios órdenes de magnitud alrededor de una mediana de 50.824 miles de pesos, un valor aproximadamente dos veces menor que el observado en I+D interna. Esto permite caracterizar la inversión en TIC como una decisión más frecuente pero de menor cuantía típica: más empresas la toman, aunque comprometiendo montos individuales más modestos.
+
+##### G. Medidas de Tendencia Central y de Dispersión
+
+La tabla recoge las medidas descriptivas calculadas sobre el total de la muestra, incluyendo las empresas sin inversión.
+
+```{r inversion-tic-medidas, results='asis', echo=FALSE}
+tabla_medidas(res_cuant$INV_TIC$medidas, "Medidas descriptivas — Inversión TIC")
+```
+
+Al igual que en I+D interna, la mediana, la moda y ambos cuartiles valen 0, de modo que el rango intercuartílico es nulo. El coeficiente de variación es de 1.006,56%, la asimetría de 17,41 y la curtosis de 369,57, cifras que, aun siendo extremas, resultan algo menos severas que las de I+D interna en cuanto a variación relativa.
+
+##### H. Diagrama de Tallo y Hojas (Stem and Leaf)
+
+El diagrama se construye sobre el logaritmo en base 10 de los 650 montos positivos, con el fin de ubicar los órdenes de magnitud en que se sitúan las empresas que invierten en TIC.
+
+```{r inversion-tic-stem, results='asis', echo=FALSE}
+mostrar_tallo_hojas(res_cuant$INV_TIC)
+```
+
+Las hojas se distribuyen a lo largo de 45 tallos con un máximo claro en el tallo 47 y una concentración apreciable entre los tallos 44 y 48, de modo que, a diferencia de I+D interna, aquí sí se aprecia un nivel de inversión más característico. Esta forma, más parecida a una distribución unimodal en escala logarítmica, sugiere que la inversión en TIC responde a un patrón más estandarizado, compatible con la adquisición de soluciones tecnológicas de mercado.
+
+#### 4.1.2.4 Inversión formación
+
+La variable corresponde al código II1R9C2, la cual representa los recursos en miles de pesos corrientes destinados a formación y capacitación del personal en 2021, por lo que su descripción permite examinar la frecuencia de valores nulos y la heterogeneidad de los montos reportados.
+
+Esta variable es relevante, porque forma parte de la categorización de la tipología de innovación, permitiendo estudiar su relación con el tamaño de la empresa y con los ingresos.
+
+
+##### A. Tabla de Frecuencias
+
+La tabla reparte los montos destinados a formación y capacitación en diez intervalos de igual amplitud, con el fin de cuantificar la frecuencia de valores nulos y la heterogeneidad de los montos reportados.
+
+```{r inversion-formacion-tabla, results='asis', echo=FALSE}
+tabla_frec(res_cuant$INV_FORMACION$tabla, "Tabla de frecuencias — Inversión formación")
+```
+
+El primer intervalo reúne 3.992 empresas (99,75%), de las cuales 3.692 (92,25%) reportan inversión igual a cero. Solo 310 empresas (7,75%) destinaron recursos a formación, y únicamente 10 superan los 214.335 miles de pesos. Además, el máximo de esta variable (2.143.352 miles de pesos) es casi doce veces menor que el de I+D interna y más de quince veces menor que el de TIC, lo que la sitúa como el rubro de menor cuantía de los tres.
+
+##### B. Histograma
+
+El histograma representa la densidad por intervalo sobre el total de la muestra y ubica la media y la mediana para dimensionar el efecto de los valores nulos.
+
+```{r inversion-formacion-hist}
+res_cuant$INV_FORMACION$p_hist
+```
+
+La barra única en el origen reproduce el patrón de las dos variables anteriores, aunque con una diferencia de escala notable: la media es de apenas 3.317 miles de pesos, veintitrés veces menor que la de I+D interna y treinta y seis veces menor que la de TIC. La formación del talento humano aparece, por tanto, como la vía de inversión en innovación menos utilizada y peor dotada de recursos.
+
+##### C. Polígono de Frecuencias
+
+El polígono se traza en escala logarítmica sobre los montos positivos, con el propósito de observar la forma de la distribución entre las empresas que sí invirtieron en formación.
+
+```{r inversion-formacion-poligono}
+res_cuant$INV_FORMACION$p_poligono
+```
+
+El polígono desciende verticalmente desde el primer punto y permanece sobre el eje en el resto del recorrido, lo que indica, igual que en los casos anteriores, que no existe una distribución continua de montos sino una acumulación masiva en cero con casos positivos muy dispersos.
+
+##### D. Curva de Densidad (Kernel)
+
+La curva de densidad se calcula sobre las 310 empresas con inversión positiva, para describir la distribución de los montos cuando efectivamente existe inversión en formación.
+
+```{r inversion-formacion-densidad}
+res_cuant$INV_FORMACION$p_densidad
+```
+
+Entre quienes invierten, la mediana es de 6.318 miles de pesos y la media de 42.818, con una relación de casi siete veces entre ambas. Lo más relevante es el orden de magnitud: la mediana de la inversión en formación es quince veces menor que la de I+D interna y ocho veces menor que la de TIC, de modo que incluso las empresas que capacitan a su personal lo hacen con presupuestos modestos.
+
+##### E. Ojiva (Frecuencias Acumuladas)
+
+La ojiva permite leer en qué umbral se acumula la práctica totalidad de la muestra.
+
+```{r inversion-formacion-ojiva}
+res_cuant$INV_FORMACION$p_ojiva
+```
+
+La curva alcanza el 99,75% en el primer intervalo y presenta amplios tramos planos: entre los 428.670 y los 1.071.676 miles de pesos y entre los 1.286.011 y los 1.929.017 no se registra ninguna empresa. Esto confirma que los montos altos de formación son casos puntuales y no la cola de una distribución continua.
+
+##### F. Diagrama de Caja y Bigotes (Boxplot)
+
+El diagrama de caja se construye en escala logarítmica sobre las 310 empresas con inversión positiva, describiendo la dispersión dentro del grupo que invierte.
+
+```{r inversion-formacion-box, fig.height=3.2}
+res_cuant$INV_FORMACION$p_box
+```
+
+La caja se sitúa en niveles claramente inferiores a los de I+D interna y TIC, con una mediana de 6.318 miles de pesos, y mantiene sin embargo una amplitud de varios órdenes de magnitud. El aporte de esta lectura es confirmar que la formación no solo es poco frecuente, sino también poco intensiva: aun entre quienes la financian, los montos típicos son de una escala distinta a la de las otras dos vías de inversión.
+
+##### G. Medidas de Tendencia Central y de Dispersión
+
+La tabla reúne las medidas descriptivas calculadas sobre el total de la muestra, incluyendo las empresas sin inversión.
+
+```{r inversion-formacion-medidas, results='asis', echo=FALSE}
+tabla_medidas(res_cuant$INV_FORMACION$medidas,
+              "Medidas descriptivas — Inversión formación")
+```
+
+Esta es la variable con mayor desigualdad relativa de todo el estudio: el coeficiente de variación alcanza el 1.508,31%, la asimetría llega a 30,73 y la curtosis a 1.097,60, valores muy superiores a los de cualquier otra variable analizada. Como en los dos casos anteriores, mediana, moda y cuartiles valen 0 y el rango intercuartílico es nulo.
+
+##### H. Diagrama de Tallo y Hojas (Stem and Leaf)
+
+El diagrama se construye sobre el logaritmo en base 10 de los 310 montos positivos, con el fin de identificar los órdenes de magnitud en que se concentran las empresas que invierten en formación.
+
+```{r inversion-formacion-stem, results='asis', echo=FALSE}
+mostrar_tallo_hojas(res_cuant$INV_FORMACION)
+```
+
+Las hojas se reparten entre 37 tallos, con acumulaciones destacadas en los tallos 24, 33, 38, 40 y 42, sin un máximo único dominante. Este reparto en varios puntos del recorrido, unido a la pequeña escala de los montos, sugiere que la inversión en formación responde a decisiones puntuales y de cuantía variable antes que a una política de gasto sostenida y comparable entre empresas.
+
+#### 4.1.2.5 Personal
+
+La variable corresponde al código IV1R11C2, cuyos registros detallan el total de personal ocupado promedio, en tiempo completo, permanente y temporal, que laboró en la empresa durante 2021, por lo que se utiliza como aproximación al tamaño de la empresa en términos de empleo.
+
+Su naturaleza es cuantitativa discreta, de modo que su distribución debe analizarse con tablas de frecuencia, medidas de tendencia central y dispersión, y gráficos que permitan identificar la concentración de empresas de menor o mayor tamaño dentro de la muestra.
+
+Además, conviene revisar valores atípicos y comparar la distribución por actividad económica, porque el tamaño del empleo puede variar de forma importante entre sectores y servir como referencia para estudiar su relación con los ingresos y con las inversiones en innovación.
+
+Permitiendo llegar a describir el tamaño del personal ocupado entre las diferentes actividades y si existe relación alguna entre tamaño, ingresos e inversión.
+
+
+##### A. Tabla de Frecuencias
+
+La tabla agrupa el personal ocupado en diez intervalos de igual amplitud sobre todo el recorrido de la variable, con el fin de establecer qué tamaños de empresa predominan en la muestra.
+
+```{r personal-tabla, results='asis', echo=FALSE}
+tabla_frec(res_cuant$PERSONAL$tabla, "Tabla de frecuencias — Personal ocupado")
+```
+
+El primer intervalo, que va de 0 a 1.223 personas, concentra 3.860 empresas (96,45%), mientras que los intervalos del quinto al octavo, entre 4.892 y 9.785 personas, están completamente vacíos y los dos últimos reúnen 10 empresas de más de 9.785 trabajadores. A diferencia de las variables de inversión, aquí los ceros son marginales: solo 35 empresas (0,87%) reportan personal ocupado nulo.
+
+##### B. Histograma
+
+El histograma representa la densidad de empresas por intervalo de tamaño y sitúa la media y la mediana, con el propósito de observar la distancia entre ambas medidas.
+
+```{r personal-hist}
+res_cuant$PERSONAL$p_hist
+```
+
+La figura muestra una barra dominante en el primer intervalo, una segunda barra pequeña pero visible entre 1.223 y 2.446 personas, y luego un vacío casi total. La media (223 personas) triplica a la mediana (67), lo que confirma asimetría positiva, aunque la brecha entre ambas medidas es mucho menor que la observada en ingresos, donde la razón era de cinco a uno.
+
+##### C. Polígono de Frecuencias
+
+El polígono une los puntos medios de los intervalos sobre escala lineal, dado que esta variable no requiere transformación logarítmica para ser legible.
+
+```{r personal-poligono}
+res_cuant$PERSONAL$p_poligono
+```
+
+El polígono asciende hasta el punto medio del primer intervalo, con 3.860 empresas, desciende de forma abrupta y queda pegado al eje durante todo el resto del recorrido. Las 10 empresas de más de 9.785 trabajadores que registra la tabla no llegan a producir ningún repunte visible a esta escala, y ese es precisamente el resultado informativo: la diferencia de tamaño entre la empresa típica y las mayores de la muestra es de tal magnitud que estas últimas resultan indistinguibles del eje en una representación de frecuencias absolutas.
+
+##### D. Curva de Densidad (Kernel)
+
+La curva de densidad describe la forma de la distribución del empleo sin depender de la elección de intervalos.
+
+```{r personal-densidad}
+res_cuant$PERSONAL$p_densidad
+```
+
+La curva presenta un máximo único muy marcado en los tamaños pequeños y decae con rapidez, de modo que la muestra es claramente unimodal. La media y la mediana aparecen muy próximas entre sí en el extremo izquierdo de la figura, lo que refleja que la inmensa mayoría de las empresas se concentra en un rango estrecho de tamaños frente a un recorrido total que llega hasta 12.231 personas.
+
+##### E. Ojiva (Frecuencias Acumuladas)
+
+La ojiva permite leer qué proporción de empresas se alcanza en cada umbral de tamaño, lo que facilita situar a una empresa concreta dentro de la muestra.
+
+```{r personal-ojiva}
+res_cuant$PERSONAL$p_ojiva
+```
+
+La curva acumula el 96,45% de las empresas antes de las 1.223 personas y luego avanza de manera casi horizontal. Complementando la tabla con el cálculo directo sobre los datos, el 78,9% de las empresas tiene 200 trabajadores o menos y el 90,7% no supera los 500, de modo que la muestra está compuesta mayoritariamente por organizaciones de tamaño pequeño y mediano.
+
+##### F. Diagrama de Caja y Bigotes (Boxplot)
+
+El diagrama de caja se presenta en escala lineal, por lo que la caja, los bigotes y los valores atípicos se calculan sobre los valores originales de la variable e incluyen a la totalidad de la muestra.
+
+```{r personal-box, fig.height=3.2}
+res_cuant$PERSONAL$p_box
+```
+
+La caja aparece comprimida contra el extremo izquierdo, entre un primer cuartil de 29 y un tercer cuartil de 171 personas, y la gráfica queda dominada por una nube densa de valores atípicos: 458 empresas (11,4% de la muestra) superan el límite superior del bigote. Esta imagen resume bien la estructura del empleo en estos sectores, donde la empresa típica es pequeña y la dispersión proviene de un número reducido de grandes empleadores.
+
+##### G. Medidas de Tendencia Central y de Dispersión
+
+La tabla reúne las medidas de posición, dispersión y forma de la variable sobre el total de la muestra.
+
+```{r personal-medidas, results='asis', echo=FALSE}
+tabla_medidas(res_cuant$PERSONAL$medidas, "Medidas descriptivas — Personal ocupado")
+```
+
+El coeficiente de variación es del 309,03%, la asimetría de 11,65 y la curtosis de 175,87, valores que, siendo altos, resultan los más moderados de las cinco variables cuantitativas. El rango intercuartílico es de 142 personas frente a un rango total de 12.231, y la moda se sitúa en 131 trabajadores, por encima de la mediana de 67, lo que refleja la naturaleza discreta de la variable y la presencia de valores repetidos en tamaños concretos.
+
+##### H. Diagrama de Tallo y Hojas (Stem and Leaf)
+
+El diagrama se construye sobre el logaritmo en base 10 de los 3.967 valores positivos. Se recurre a esta escala únicamente para este apartado, porque en escala lineal el factor del tallo resultante agruparía a 3.786 empresas en un solo renglón y haría ilegible el diagrama.
+
+```{r personal-stem, results='asis', echo=FALSE}
+mostrar_tallo_hojas(res_cuant$PERSONAL)
+```
+
+Al desplegarse en escala logarítmica, el diagrama muestra una distribución con una zona central densa y extremos progresivamente más delgados, forma coherente con la que ya mostraban el histograma y la curva de densidad. Su aporte es evidenciar que, pese a la fuerte asimetría en escala lineal, los tamaños empresariales se ordenan de forma regular cuando se los observa en términos de orden de magnitud, igual que ocurría con los ingresos.
+
+
+## 4.2 Análisis bivariado
+
+### 4.2.1 Análisis bivariado cualitativo
+
+El análisis bivariado cualitativo examina las diez combinaciones posibles entre las cinco variables nominales del estudio, con el fin de establecer si la distribución de una de ellas cambia según la categoría que tome la otra, lo que permitiría caracterizar el perfil de las empresas que innovan, que certifican o que mantienen control familiar.
+
+Cada cruce se presenta mediante **A) Tablas cruzadas**, con una primera tabla de frecuencias absolutas que incluye los totales marginales y una segunda tabla de perfiles de fila en porcentaje, y **B) Diagrama de barras comparativas**, construido como barras apiladas al 100% que muestran la composición de la segunda variable dentro de cada categoría de la primera.
+
+La lectura se apoya en los perfiles de fila porque las categorías tienen tamaños muy distintos: comparar porcentajes dentro de cada fila permite contrastar grupos de 5 y de 889 empresas sobre una misma base. En todos los casos la interpretación es descriptiva y asociativa, sin que de ella pueda derivarse ninguna relación de causalidad, en coherencia con el alcance definido en la justificación del estudio.
+
+#### 4.2.1.1 Sector X Tipologia
+
+Este cruce busca determinar si la propensión a innovar depende de la actividad económica en la que compite la empresa, es decir, si existen ramas donde innovar es relativamente habitual y otras donde resulta excepcional.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan el número de empresas de cada actividad según su tipología de innovación y, a continuación, la composición porcentual dentro de cada actividad.
+
+```{r biv-sector-tipologia-conteo, results='asis'}
+tabla_cruzada("SECTOR", "TIPOLOGIA", tipo = "conteo")
+```
+
+```{r biv-sector-tipologia-perfil, results='asis'}
+tabla_cruzada("SECTOR", "TIPOLOGIA", tipo = "perfil")
+```
+
+Las diferencias entre actividades son considerables. Entre las actividades con respaldo muestral suficiente, la 854 alcanza un 60,2% de empresas innovadoras en sentido amplio sobre 118 casos y la 620 un 40,3% sobre 139, muy por encima del 24,69% del conjunto; en el extremo opuesto, la actividad 47 registra apenas un 11,7% sobre 889 empresas y la 561 un 24,6%. Las actividades 641 (80,0%) y 72 (73,7%) muestran porcentajes aún mayores, pero con solo 5 y 19 empresas respectivamente, por lo que no admiten generalización.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición porcentual de tipologías dentro de cada actividad económica, ordenando las actividades por número de empresas para que el peso muestral de cada fila quede explícito.
+
+```{r biv-sector-tipologia-barras, fig.height=6.2}
+res_biv_cual$SECTOR_x_TIPOLOGIA$p_barras
+```
+
+La gráfica evidencia que el tamaño del bloque correspondiente a NOINNO varía de forma marcada entre actividades, desde el 29,7% de la 854 hasta el 90,0% de la 59 y el 88,9% de la 562. El aporte principal para la toma de decisiones es que la actividad económica discrimina: las dos actividades que concentran el mayor número de empresas de la muestra, el comercio al por menor (47) y el comercio al por mayor (46), están también entre las de menor proporción de empresas innovadoras, con un 11,7% y un 23,9% respectivamente.
+
+#### 4.2.1.2 Sector X Certificacion
+
+Este cruce busca establecer si la obtención de certificaciones de calidad de proceso está asociada a la actividad económica, lo que indicaría que la exigencia de formalización no es homogénea entre ramas.
+
+##### A. Tablas cruzadas
+
+Las tablas muestran cuántas empresas de cada actividad obtuvieron certificaciones y qué porcentaje representan dentro de su propia actividad.
+
+```{r biv-sector-certificacion-conteo, results='asis'}
+tabla_cruzada("SECTOR", "CERTIFICACION", tipo = "conteo")
+```
+
+```{r biv-sector-certificacion-perfil, results='asis'}
+tabla_cruzada("SECTOR", "CERTIFICACION", tipo = "perfil")
+```
+
+Frente al 10,34% de certificación del conjunto de la muestra, la actividad 35 alcanza un 40,9% sobre 44 empresas, la 854 un 28,8% sobre 118 y la 620 un 22,3% sobre 139, mientras que la 47 se queda en el 3,5% sobre 889 empresas y la 561 en el 2,2% sobre 138. Las actividades 58, 59, 60 y 641 no registran ninguna empresa certificada.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la proporción de empresas certificadas dentro de cada actividad económica.
+
+```{r biv-sector-certificacion-barras, fig.height=6.2}
+res_biv_cual$SECTOR_x_CERTIFICACION$p_barras
+```
+
+La gráfica muestra un gradiente claro entre actividades, con bloques de certificación que van desde la ausencia total hasta más del 40%. Lo relevante para el análisis es que las actividades con mayor certificación coinciden en buena medida con las de mayor proporción de empresas innovadoras, como la 854 y la 620, lo que anticipa la asociación que se examina en el cruce 4.2.1.5.
+
+#### 4.2.1.3 Sector X Propietario
+
+Este cruce busca describir si la estructura de propiedad varía entre actividades económicas, es decir, si hay ramas donde predomina la empresa aún en manos de su fundador y otras donde la propiedad ya se ha trasladado a terceros.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan la distribución de las tres formas de propiedad dentro de cada actividad económica.
+
+```{r biv-sector-propietario-conteo, results='asis'}
+tabla_cruzada("SECTOR", "PROPIETARIO", tipo = "conteo")
+```
+
+```{r biv-sector-propietario-perfil, results='asis'}
+tabla_cruzada("SECTOR", "PROPIETARIO", tipo = "perfil")
+```
+
+El contraste es nítido. En el comercio al por menor (47) el 66,1% de las empresas pertenece al fundador y solo el 12,5% a otro propietario, mientras que en la actividad 86 la relación se invierte, con un 40,6% del fundador y un 52,7% de otro propietario, y en la 854 el 65,3% corresponde a otro propietario. Las actividades 72, 641, 60 y 36 superan el 77% de propiedad en manos de terceros, aunque las tres primeras cuentan con muy pocos casos.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición de la propiedad dentro de cada actividad económica.
+
+```{r biv-sector-propietario-barras, fig.height=6.2}
+res_biv_cual$SECTOR_x_PROPIETARIO$p_barras
+```
+
+La gráfica permite distinguir dos perfiles: las actividades comerciales (45, 46, 47) y de restauración (561, 562) presentan los mayores bloques de propiedad fundacional y familiar, mientras que las actividades de salud (86), educación superior (854) y servicios públicos (35, 36) están dominadas por otro tipo de propietario. Esta diferencia es importante porque indica que propiedad y actividad económica no son rasgos independientes, lo que obliga a leer con cautela cualquier asociación entre propiedad e innovación.
+
+#### 4.2.1.4 Sector X Gerente
+
+Este cruce busca establecer si el esquema de gerencia, familiar o delegada, se distribuye de manera uniforme entre actividades económicas.
+
+##### A. Tablas cruzadas
+
+Las tablas muestran en cuántas empresas de cada actividad la gerencia recae en el fundador o un familiar suyo, y qué porcentaje representa dentro de la actividad.
+
+```{r biv-sector-gerente-conteo, results='asis'}
+tabla_cruzada("SECTOR", "GERENTE", tipo = "conteo")
+```
+
+```{r biv-sector-gerente-perfil, results='asis'}
+tabla_cruzada("SECTOR", "GERENTE", tipo = "perfil")
+```
+
+Frente al 58,40% de gerencia familiar del conjunto, el comercio al por menor (47) llega al 81,4% sobre 889 empresas y la actividad 561 al 74,6% sobre 138, mientras que la 854 se queda en el 28,8% sobre 118, la 86 en el 41,7% sobre 581 y la 35 en el 11,4% sobre 44. La actividad 641 no registra ninguna empresa con gerencia familiar, si bien solo cuenta con 5 casos.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la proporción de gerencia familiar dentro de cada actividad económica.
+
+```{r biv-sector-gerente-barras, fig.height=6.2}
+res_biv_cual$SECTOR_x_GERENTE$p_barras
+```
+
+La gráfica reproduce el mismo patrón observado en la estructura de propiedad: el comercio y la restauración concentran la gerencia familiar, mientras que salud, educación superior y servicios públicos presentan mayoritariamente gerencia delegada. El aporte de esta lectura es confirmar que propiedad y gerencia se comportan de forma coherente entre sí a lo largo de las actividades, lo que se verifica de manera directa en el cruce 4.2.1.10.
+
+#### 4.2.1.5 Tipologia X Certificacion
+
+Este cruce busca determinar si las empresas que alcanzan resultados de innovación son también las que obtienen certificaciones de calidad de proceso, es decir, si ambas prácticas de formalización tienden a coincidir en las mismas organizaciones.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan el número de empresas certificadas dentro de cada tipología de innovación y su peso porcentual.
+
+```{r biv-tipologia-certificacion-conteo, results='asis'}
+tabla_cruzada("TIPOLOGIA", "CERTIFICACION", tipo = "conteo")
+```
+
+```{r biv-tipologia-certificacion-perfil, results='asis'}
+tabla_cruzada("TIPOLOGIA", "CERTIFICACION", tipo = "perfil")
+```
+
+La diferencia es clara y se apoya en un número suficiente de casos: entre las empresas innovadoras en sentido amplio, el 17,4% está certificada (172 de 988), frente al 7,3% de las no innovadoras (200 de 2.737), es decir, una proporción 2,4 veces mayor. Las empresas con intención de innovar presentan un 17,6% y las potencialmente innovadoras un 10,9%. El 75,0% de certificación en ESTRIC corresponde a 3 de 4 empresas y carece de valor estadístico.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la proporción de empresas certificadas dentro de cada tipología de innovación.
+
+```{r biv-tipologia-certificacion-barras, fig.height=3.4}
+res_biv_cual$TIPOLOGIA_x_CERTIFICACION$p_barras
+```
+
+La gráfica muestra un bloque de certificación visiblemente mayor en AMPLIA e INTENC que en NOINNO. Este es uno de los hallazgos más relevantes del análisis bivariado cualitativo, porque la certificación es una decisión de gestión sobre la que la empresa puede actuar: el dato indica que innovación y certificación aparecen asociadas, aunque el carácter transversal de los datos no permite determinar si la certificación favorece la innovación, si ocurre lo contrario, o si ambas responden a una tercera característica como el tamaño.
+
+#### 4.2.1.6 Tipologia X Propietario
+
+Este cruce busca establecer si la propensión a innovar se relaciona con quién es el propietario de la empresa, aportando directamente al cuarto objetivo específico.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan la composición de la propiedad dentro de cada tipología de innovación.
+
+```{r biv-tipologia-propietario-conteo, results='asis'}
+tabla_cruzada("TIPOLOGIA", "PROPIETARIO", tipo = "conteo")
+```
+
+```{r biv-tipologia-propietario-perfil, results='asis'}
+tabla_cruzada("TIPOLOGIA", "PROPIETARIO", tipo = "perfil")
+```
+
+Se observa un desplazamiento ordenado: la participación de la categoría otro propietario pasa del 29,9% entre las no innovadoras al 40,1% entre las innovadoras en sentido amplio y al 44,5% entre las potencialmente innovadoras, mientras que la propiedad del fundador recorre el camino inverso, del 53,1% al 44,3% y al 36,5%. La propiedad de un familiar del fundador se mantiene estable entre el 15,6% y el 19,0% en todas las tipologías.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición de la propiedad dentro de cada tipología de innovación.
+
+```{r biv-tipologia-propietario-barras, fig.height=3.4}
+res_biv_cual$TIPOLOGIA_x_PROPIETARIO$p_barras
+```
+
+La gráfica muestra que el bloque de otro propietario crece de forma visible a medida que se pasa de las empresas no innovadoras a las innovadoras. La diferencia es de poco más de diez puntos porcentuales, menor que la observada en certificación, de modo que la estructura de propiedad aparece asociada a la innovación pero de forma más débil; además, el cruce 4.2.1.3 mostró que esa misma categoría se concentra en actividades como salud y educación superior, que ya exhiben por sí mismas mayor propensión a innovar.
+
+#### 4.2.1.7 Tipologia X Gerente
+
+Este cruce busca determinar si el esquema de gerencia se relaciona con la tipología de innovación, completando el análisis del cuarto objetivo específico.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan la distribución del esquema de gerencia dentro de cada tipología de innovación.
+
+```{r biv-tipologia-gerente-conteo, results='asis'}
+tabla_cruzada("TIPOLOGIA", "GERENTE", tipo = "conteo")
+```
+
+```{r biv-tipologia-gerente-perfil, results='asis'}
+tabla_cruzada("TIPOLOGIA", "GERENTE", tipo = "perfil")
+```
+
+La gerencia familiar alcanza el 62,6% entre las empresas no innovadoras y desciende al 49,6% entre las innovadoras en sentido amplio y al 44,5% entre las potencialmente innovadoras, una diferencia de trece a dieciocho puntos porcentuales. Las empresas con intención de innovar presentan un 53,7%, valor intermedio.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición del esquema de gerencia dentro de cada tipología de innovación.
+
+```{r biv-tipologia-gerente-barras, fig.height=3.4}
+res_biv_cual$TIPOLOGIA_x_GERENTE$p_barras
+```
+
+La gráfica muestra que, mientras entre las no innovadoras casi dos de cada tres empresas mantienen gerencia del fundador o de un familiar, entre las innovadoras en sentido amplio el reparto es prácticamente equilibrado. El aporte para la decisión directiva es que la delegación de la gerencia aparece asociada a una mayor presencia de resultados de innovación, con una diferencia de magnitud similar a la observada en la estructura de propiedad.
+
+#### 4.2.1.8 Certificacion X Propietario
+
+Este cruce busca establecer si la obtención de certificaciones de calidad se relaciona con la estructura de propiedad de la empresa.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan la composición de la propiedad dentro de cada grupo de certificación.
+
+```{r biv-certificacion-propietario-conteo, results='asis'}
+tabla_cruzada("CERTIFICACION", "PROPIETARIO", tipo = "conteo")
+```
+
+```{r biv-certificacion-propietario-perfil, results='asis'}
+tabla_cruzada("CERTIFICACION", "PROPIETARIO", tipo = "perfil")
+```
+
+Entre las empresas certificadas, el 44,4% pertenece a otro propietario y el 39,9% al fundador, mientras que entre las no certificadas la relación se invierte, con un 32,1% y un 51,1% respectivamente. La participación de la propiedad de un familiar del fundador es prácticamente idéntica en ambos grupos, 15,7% frente a 16,8%.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición de la propiedad entre empresas certificadas y no certificadas.
+
+```{r biv-certificacion-propietario-barras, fig.height=2.9}
+res_biv_cual$CERTIFICACION_x_PROPIETARIO$p_barras
+```
+
+La gráfica muestra un desplazamiento de doce puntos porcentuales a favor de la categoría otro propietario en el grupo certificado. Esto reproduce, con una intensidad similar, el patrón ya observado entre propiedad e innovación, lo que sugiere que certificación e innovación comparten un mismo perfil de propiedad y refuerza la idea de que ambas son expresiones de un mismo grado de formalización de la empresa.
+
+#### 4.2.1.9 Certificacion X Gerente
+
+Este cruce busca determinar si la certificación de calidad se relaciona con el esquema de gerencia de la empresa.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan la distribución del esquema de gerencia dentro de cada grupo de certificación.
+
+```{r biv-certificacion-gerente-conteo, results='asis'}
+tabla_cruzada("CERTIFICACION", "GERENTE", tipo = "conteo")
+```
+
+```{r biv-certificacion-gerente-perfil, results='asis'}
+tabla_cruzada("CERTIFICACION", "GERENTE", tipo = "perfil")
+```
+
+Entre las empresas certificadas, el 47,6% mantiene gerencia del fundador o de un familiar, frente al 59,6% entre las no certificadas, una diferencia de doce puntos porcentuales en la misma dirección que todos los cruces anteriores.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición del esquema de gerencia entre empresas certificadas y no certificadas.
+
+```{r biv-certificacion-gerente-barras, fig.height=2.8}
+res_biv_cual$CERTIFICACION_x_GERENTE$p_barras
+```
+
+La gráfica muestra que en el grupo certificado la gerencia delegada es ligeramente mayoritaria (52,4%), situación que no se da en ningún otro subgrupo analizado. El aporte de esta lectura es cerrar de forma coherente el bloque cualitativo: certificación, innovación y gerencia delegada aparecen sistemáticamente asociadas entre sí, con diferencias moderadas pero consistentes en magnitud y sentido.
+
+#### 4.2.1.10 Propietario x Gerente
+
+Este cruce busca verificar en qué medida la propiedad y la gerencia coinciden en las mismas manos, lo que permite valorar si ambas variables aportan información distinta o si describen en gran parte el mismo fenómeno.
+
+##### A. Tablas cruzadas
+
+Las tablas presentan la distribución del esquema de gerencia dentro de cada forma de propiedad.
+
+```{r biv-propietario-gerente-conteo, results='asis'}
+tabla_cruzada("PROPIETARIO", "GERENTE", tipo = "conteo")
+```
+
+```{r biv-propietario-gerente-perfil, results='asis'}
+tabla_cruzada("PROPIETARIO", "GERENTE", tipo = "perfil")
+```
+
+La correspondencia es muy alta: cuando la empresa pertenece al fundador, el 77,5% tiene gerencia familiar, y cuando pertenece a un familiar del fundador, el 75,6%; en cambio, cuando pertenece a otro propietario, solo el 21,1% conserva gerencia familiar. Dicho de otro modo, 2.055 de las 2.667 empresas de propiedad fundacional o familiar (77,1%) son también dirigidas desde ese círculo.
+
+##### B. Diagrama de barras comparativas
+
+El diagrama compara la composición del esquema de gerencia dentro de cada forma de propiedad.
+
+```{r biv-propietario-gerente-barras, fig.height=3.0}
+res_biv_cual$PROPIETARIO_x_GERENTE$p_barras
+```
+
+La gráfica muestra dos perfiles casi idénticos para fundador y familiar del fundador, y un perfil claramente opuesto para otro propietario. Esta es una advertencia metodológica relevante: **Propietario** y **Gerente** miden en gran medida el mismo rasgo de control familiar, por lo que las asociaciones observadas en 4.2.1.6 y 4.2.1.7 no deben interpretarse como dos evidencias independientes sino como dos manifestaciones del mismo fenómeno.
+
+
+
+### 4.2.2 Análisis bivariado cuantitativo
+<!-- Lo que se grafica es unicamente el diagrama de dispersion y la regresion lineal, pues la correlacion de pearson solo se analiza su valor, para despues hacer el la regresion lineal. AL final del analisis bivariado cuantitativo se hace un heatmap analizando los coeficientes de pearson de todas las variables  -->
+El análisis bivariado cuantitativo examina las diez combinaciones posibles entre las cinco variables numéricas del estudio, con el fin de establecer si existe asociación lineal entre la escala económica de la empresa, su tamaño en empleo y los montos que destina a cada vía de innovación.
+
+Cada par se presenta mediante **A) Diagrama de dispersión X/Y**, que muestra la nube de puntos sin ningún ajuste impuesto, **B) Análisis de correlación de Pearson**, del que se analiza únicamente el valor del coeficiente y su significancia sin representación gráfica propia, y **C) Regresión lineal simple**, que incorpora la recta de mínimos cuadrados sobre la nube de puntos junto con la tabla de los elementos del modelo. Al cierre de la sección se incluye un mapa de calor que reúne los coeficientes de Pearson de todas las variables.
+
+Antes de interpretar los resultados conviene fijar dos advertencias que afectan a todos los pares. La primera es que las tres variables de inversión contienen entre un 83,76% y un 92,90% de valores iguales a cero, por lo que la nube de puntos se apoya en buena medida sobre los ejes y los coeficientes recogen tanto la decisión de invertir como la magnitud invertida. La segunda es que todas las variables presentan asimetría y curtosis muy elevadas, de modo que los coeficientes son sensibles a un número reducido de empresas extremas; en consecuencia, los resultados se leen como asociaciones observadas en la muestra investigada y no como relaciones de causalidad.
+
+#### 4.2.2.1 Ingresos X Inversion ID interna
+
+Este par busca establecer si las empresas de mayor facturación son también las que destinan más recursos a investigación y desarrollo interno, lo que aportaría al quinto objetivo específico sobre la relación entre ingresos e inversión.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según sus ingresos y su inversión en I+D interna, con el fin de observar la forma de la nube antes de imponer ningún modelo.
+
+```{r disp-ing-id}
+res_biv_cuant$INGRESOS_x_INV_ID$p_disp
+```
+
+La nube se concentra casi por completo sobre el eje horizontal, reflejo de las 3.718 empresas sin inversión en I+D, y los puntos con valores positivos aparecen muy dispersos sin seguir una trayectoria definida. Se aprecia que las inversiones más altas corresponden a empresas de ingresos medios y altos, pero también que numerosas empresas de ingresos elevados no invierten nada.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente de Pearson cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-ing-id, results='asis'}
+tabla_correlacion(res_biv_cuant$INGRESOS_x_INV_ID)
+```
+
+El coeficiente es de 0,3268, lo que corresponde a una asociación débil positiva, estadísticamente significativa con un valor p inferior a 0,001 e intervalo de confianza al 95% entre 0,2989 y 0,3542. El coeficiente de determinación de 0,1068 indica que los ingresos explican solo el 10,68% de la variabilidad de la inversión en I+D interna.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta de mínimos cuadrados que mejor describe la inversión en I+D interna en función de los ingresos.
+
+```{r reg-ing-id}
+res_biv_cuant$INGRESOS_x_INV_ID$p_reg
+```
+
+```{r regt-ing-id, results='asis'}
+tabla_regresion(res_biv_cuant$INGRESOS_x_INV_ID)
+```
+
+La pendiente estimada es de 0,0010807, lo que significa que por cada 1.000.000 de miles de pesos adicionales de ingresos la inversión en I+D interna aumenta en promedio 1.081 miles de pesos. El modelo es significativo pero su capacidad explicativa es limitada: facturar más no implica, en esta muestra, invertir proporcionalmente más en investigación propia.
+
+#### 4.2.2.2 Ingresos X Inversion TIC
+
+Este par busca determinar si la escala económica de la empresa se relaciona con los recursos destinados a tecnologías de la información, el rubro de inversión más extendido según el análisis univariado.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según sus ingresos y su inversión en TIC.
+
+```{r disp-ing-tic}
+res_biv_cuant$INGRESOS_x_INV_TIC$p_disp
+```
+
+Aunque la nube sigue apoyada sobre el eje horizontal por las 3.352 empresas sin inversión, se aprecia con claridad una tendencia ascendente: los valores más altos de inversión en TIC se sitúan en el rango superior de ingresos y prácticamente no aparecen montos elevados entre las empresas de menor facturación.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-ing-tic, results='asis'}
+tabla_correlacion(res_biv_cuant$INGRESOS_x_INV_TIC)
+```
+
+El coeficiente asciende a 0,5829, una asociación moderada positiva y significativa, con intervalo de confianza entre 0,5621 y 0,6030. Es la segunda correlación más alta de todo el análisis y, con un coeficiente de determinación de 0,3398, los ingresos explican el 33,98% de la variabilidad de la inversión en TIC, más del triple que en el caso de la I+D interna.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe la inversión en TIC en función de los ingresos.
+
+```{r reg-ing-tic}
+res_biv_cuant$INGRESOS_x_INV_TIC$p_reg
+```
+
+```{r regt-ing-tic, results='asis'}
+tabla_regresion(res_biv_cuant$INGRESOS_x_INV_TIC)
+```
+
+La pendiente es de 0,0024572, de modo que por cada 1.000.000 de miles de pesos adicionales de ingresos la inversión en TIC aumenta en promedio 2.457 miles de pesos, más del doble que en I+D interna. Para la toma de decisiones esto indica que la inversión tecnológica es la vía de innovación que acompaña de manera más estrecha al crecimiento de la facturación.
+
+#### 4.2.2.3 Ingresos X Inversion formación
+
+Este par busca establecer si las empresas de mayor facturación destinan también más recursos a la formación de su personal.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según sus ingresos y su inversión en formación.
+
+```{r disp-ing-form}
+res_biv_cuant$INGRESOS_x_INV_FORMACION$p_disp
+```
+
+La nube es la más plana de las tres vías de inversión: los montos positivos son escasos y de pequeña magnitud, y aparecen repartidos a lo largo de todo el rango de ingresos sin una pauta ascendente nítida.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-ing-form, results='asis'}
+tabla_correlacion(res_biv_cuant$INGRESOS_x_INV_FORMACION)
+```
+
+El coeficiente es de 0,2417, una asociación débil positiva aunque significativa, con intervalo de confianza entre 0,2123 y 0,2706. El coeficiente de determinación de 0,0584 indica que los ingresos explican apenas el 5,84% de la variabilidad de la inversión en formación.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe la inversión en formación en función de los ingresos.
+
+```{r reg-ing-form}
+res_biv_cuant$INGRESOS_x_INV_FORMACION$p_reg
+```
+
+```{r regt-ing-form, results='asis'}
+tabla_regresion(res_biv_cuant$INGRESOS_x_INV_FORMACION)
+```
+
+La pendiente es de 4,1782e-05, es decir, apenas 42 miles de pesos adicionales de formación por cada 1.000.000 de miles de pesos de ingresos, cincuenta y nueve veces menos que en el caso de las TIC. El aporte de este resultado es mostrar que la formación del talento humano es la vía de inversión que menos acompaña al crecimiento económico de la empresa.
+
+#### 4.2.2.4 Ingresos X Personal
+
+Este par busca establecer la relación entre la escala económica y el tamaño en empleo de la empresa, dos aproximaciones distintas a la noción de tamaño empresarial.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según sus ingresos y su personal ocupado.
+
+```{r disp-ing-per}
+res_biv_cuant$INGRESOS_x_PERSONAL$p_disp
+```
+
+A diferencia de los pares anteriores, aquí la nube ocupa el plano y describe una trayectoria ascendente reconocible desde el origen, consecuencia de que ambas variables tienen muy pocos ceros. La dispersión aumenta a medida que crecen los ingresos, con empresas que alcanzan facturaciones muy altas con plantillas moderadas y viceversa.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-ing-per, results='asis'}
+tabla_correlacion(res_biv_cuant$INGRESOS_x_PERSONAL)
+```
+
+El coeficiente alcanza 0,7350, la correlación más alta de todo el estudio, calificada como fuerte positiva y significativa, con intervalo de confianza entre 0,7204 y 0,7489. El coeficiente de determinación de 0,5402 señala que los ingresos explican el 54,02% de la variabilidad del personal ocupado.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe el personal ocupado en función de los ingresos.
+
+```{r reg-ing-per}
+res_biv_cuant$INGRESOS_x_PERSONAL$p_reg
+```
+
+```{r regt-ing-per, results='asis'}
+tabla_regresion(res_biv_cuant$INGRESOS_x_PERSONAL)
+```
+
+La pendiente es de 1,7538e-06, lo que equivale a 1,75 personas adicionales por cada 1.000.000 de miles de pesos de ingresos. Este resultado es relevante en términos metodológicos: ingresos y personal miden en gran medida la misma dimensión de tamaño empresarial, por lo que las asociaciones de cada uno con la inversión en innovación no constituyen evidencias independientes.
+
+#### 4.2.2.5 Inversion ID interna X Inversion TIC
+
+Este par busca determinar si las empresas que invierten en investigación propia son también las que invierten en tecnología, es decir, si ambas vías de innovación son complementarias o alternativas.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según su inversión en I+D interna y su inversión en TIC.
+
+```{r disp-id-tic}
+res_biv_cuant$INV_ID_x_INV_TIC$p_disp
+```
+
+La nube se concentra en el origen, puesto que 3.278 empresas no invierten en ninguno de los tres rubros, y los puntos alejados del origen se reparten a lo largo de ambos ejes, con casos que invierten fuerte en un rubro y nada en el otro.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-id-tic, results='asis'}
+tabla_correlacion(res_biv_cuant$INV_ID_x_INV_TIC)
+```
+
+El coeficiente es de 0,4018, una asociación moderada positiva y significativa, con intervalo de confianza entre 0,3755 y 0,4275. El coeficiente de determinación de 0,1614 indica que la inversión en I+D interna explica el 16,14% de la variabilidad de la inversión en TIC.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe la inversión en TIC en función de la inversión en I+D interna.
+
+```{r reg-id-tic}
+res_biv_cuant$INV_ID_x_INV_TIC$p_reg
+```
+
+```{r regt-id-tic, results='asis'}
+tabla_regresion(res_biv_cuant$INV_ID_x_INV_TIC)
+```
+
+La pendiente es de 0,51227, de modo que por cada peso destinado a I+D interna se asocian en promedio 0,51 pesos adicionales en TIC. Es la correlación más alta entre dos rubros de inversión, lo que sugiere que ambas vías tienden a ser complementarias y no sustitutivas: la empresa que desarrolla capacidades propias es también la que adquiere tecnología.
+
+#### 4.2.2.6 Inversion ID interna X Inversion formación
+
+Este par busca establecer si el esfuerzo en investigación propia se acompaña de una inversión en la capacitación del personal que la realiza.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según su inversión en I+D interna y su inversión en formación.
+
+```{r disp-id-form}
+res_biv_cuant$INV_ID_x_INV_FORMACION$p_disp
+```
+
+La nube se apoya casi íntegramente sobre ambos ejes, con muy pocos puntos en el interior del plano, lo que indica que es poco frecuente que una misma empresa registre montos positivos en ambos rubros a la vez.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-id-form, results='asis'}
+tabla_correlacion(res_biv_cuant$INV_ID_x_INV_FORMACION)
+```
+
+El coeficiente es de 0,1064, la correlación más baja de todo el estudio, calificada como muy débil positiva; aun siendo significativa por el tamaño muestral, su intervalo de confianza entre 0,0757 y 0,1369 confirma que la asociación es de magnitud mínima y el coeficiente de determinación de 0,0113 indica que explica solo el 1,13% de la variabilidad.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe la inversión en formación en función de la inversión en I+D interna.
+
+```{r reg-id-form}
+res_biv_cuant$INV_ID_x_INV_FORMACION$p_reg
+```
+
+```{r regt-id-form, results='asis'}
+tabla_regresion(res_biv_cuant$INV_ID_x_INV_FORMACION)
+```
+
+La pendiente es de 0,0055642, apenas medio centavo de formación por cada peso de I+D interna. El aporte de este resultado es señalar una desconexión relevante para la gestión: las empresas que invierten en desarrollo propio no están acompañando ese esfuerzo con inversión en las capacidades de su personal.
+
+#### 4.2.2.7 Inversion ID interna X Personal
+
+Este par busca establecer si el tamaño de la empresa, medido por su plantilla, se relaciona con el monto destinado a investigación y desarrollo interno.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según su inversión en I+D interna y su personal ocupado.
+
+```{r disp-id-per}
+res_biv_cuant$INV_ID_x_PERSONAL$p_disp
+```
+
+La nube muestra que las inversiones más elevadas en I+D interna corresponden a empresas con plantillas grandes, aunque también se observan numerosas empresas de gran tamaño con inversión nula, concentradas sobre el eje vertical.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-id-per, results='asis'}
+tabla_correlacion(res_biv_cuant$INV_ID_x_PERSONAL)
+```
+
+El coeficiente es de 0,4919, una asociación moderada positiva y significativa, con intervalo de confianza entre 0,4681 y 0,5151, y un coeficiente de determinación de 0,2420. Es superior al obtenido con los ingresos (0,3268), de modo que el tamaño en empleo resulta mejor predictor de la I+D interna que la facturación.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe el personal ocupado en función de la inversión en I+D interna.
+
+```{r reg-id-per}
+res_biv_cuant$INV_ID_x_PERSONAL$p_reg
+```
+
+```{r regt-id-per, results='asis'}
+tabla_regresion(res_biv_cuant$INV_ID_x_PERSONAL)
+```
+
+La pendiente es de 0,00035503, equivalente a 355 personas adicionales por cada 1.000.000 de miles de pesos invertidos en I+D interna. Conviene subrayar que, al tratarse de un modelo descriptivo, la lectura correcta es que ambas magnitudes crecen juntas y no que la inversión genere empleo.
+
+#### 4.2.2.8 Inversion TIC X Inversion formación
+
+Este par busca determinar si la adopción de tecnología se acompaña de la capacitación necesaria para aprovecharla.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según su inversión en TIC y su inversión en formación.
+
+```{r disp-tic-form}
+res_biv_cuant$INV_TIC_x_INV_FORMACION$p_disp
+```
+
+Al igual que en el par anterior, la nube se apoya sobre los ejes y presenta muy pocos puntos interiores, señal de que la coincidencia de ambos tipos de inversión en una misma empresa es poco común.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-tic-form, results='asis'}
+tabla_correlacion(res_biv_cuant$INV_TIC_x_INV_FORMACION)
+```
+
+El coeficiente es de 0,1416, una asociación muy débil positiva, significativa pero de magnitud reducida, con intervalo de confianza entre 0,1111 y 0,1719 y un coeficiente de determinación de 0,0201.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe la inversión en formación en función de la inversión en TIC.
+
+```{r reg-tic-form}
+res_biv_cuant$INV_TIC_x_INV_FORMACION$p_reg
+```
+
+```{r regt-tic-form, results='asis'}
+tabla_regresion(res_biv_cuant$INV_TIC_x_INV_FORMACION)
+```
+
+La pendiente es de 0,0058095, prácticamente idéntica a la observada entre I+D interna y formación. Este resultado refuerza la conclusión del par 4.2.2.6: la formación del personal aparece desvinculada de las otras dos vías de inversión, lo que señala una brecha concreta sobre la que una empresa puede actuar.
+
+#### 4.2.2.9 Inversion TIC X Personal
+
+Este par busca establecer si el tamaño de la plantilla se relaciona con el monto destinado a tecnologías de la información.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según su inversión en TIC y su personal ocupado.
+
+```{r disp-tic-per}
+res_biv_cuant$INV_TIC_x_PERSONAL$p_disp
+```
+
+La nube presenta una pauta ascendente reconocible entre las empresas con inversión positiva, acompañada de una columna densa de empresas sobre el eje vertical que no invierten en TIC pese a tener plantillas de todos los tamaños.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-tic-per, results='asis'}
+tabla_correlacion(res_biv_cuant$INV_TIC_x_PERSONAL)
+```
+
+El coeficiente es de 0,4754, una asociación moderada positiva y significativa, con intervalo de confianza entre 0,4510 y 0,4990 y un coeficiente de determinación de 0,2260, valor muy próximo al obtenido entre personal e I+D interna.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe el personal ocupado en función de la inversión en TIC.
+
+```{r reg-tic-per}
+res_biv_cuant$INV_TIC_x_PERSONAL$p_reg
+```
+
+```{r regt-tic-per, results='asis'}
+tabla_regresion(res_biv_cuant$INV_TIC_x_PERSONAL)
+```
+
+La pendiente es de 0,00026911, equivalente a 269 personas adicionales por cada 1.000.000 de miles de pesos invertidos en TIC. La similitud con el par 4.2.2.7 indica que el tamaño en empleo se relaciona de manera parecida con ambos rubros de inversión, a diferencia de lo que ocurría con los ingresos, que discriminaban claramente a favor de las TIC.
+
+#### 4.2.2.10 Inversion formación X Personal
+
+Este par cierra el análisis estableciendo si las empresas con más trabajadores destinan más recursos a formarlos.
+
+##### A. Diagrama de dispersion X/Y
+
+El diagrama representa cada empresa según su inversión en formación y su personal ocupado.
+
+```{r disp-form-per}
+res_biv_cuant$INV_FORMACION_x_PERSONAL$p_disp
+```
+
+La nube se concentra sobre el eje vertical, con empresas de todos los tamaños que no registran inversión en formación, y los pocos montos positivos no dibujan una pauta clara respecto al tamaño de la plantilla.
+
+##### B. Análisis de correlación de Pearson
+
+El coeficiente cuantifica la intensidad y el sentido de la asociación lineal entre ambas variables.
+
+```{r corr-form-per, results='asis'}
+tabla_correlacion(res_biv_cuant$INV_FORMACION_x_PERSONAL)
+```
+
+El coeficiente es de 0,2144, una asociación débil positiva y significativa, con intervalo de confianza entre 0,1847 y 0,2438 y un coeficiente de determinación de 0,0460, de modo que el tamaño de la plantilla explica apenas el 4,60% de la variabilidad de la inversión en formación.
+
+##### C. Regresión lineal simple
+
+La regresión ajusta la recta que describe el personal ocupado en función de la inversión en formación.
+
+```{r reg-form-per}
+res_biv_cuant$INV_FORMACION_x_PERSONAL$p_reg
+```
+
+```{r regt-form-per, results='asis'}
+tabla_regresion(res_biv_cuant$INV_FORMACION_x_PERSONAL)
+```
+
+La pendiente es de 0,0029592, el valor más alto en términos relativos de todos los pares que involucran formación, lo que se explica por la pequeña escala de esta variable. El hallazgo de fondo es que el número de personas empleadas no determina la inversión en su capacitación: hay empresas con miles de trabajadores que no destinaron ningún recurso a formarlos en 2021.
+
+#### 4.2.2.11 Mapa de calor de los coeficientes de correlación de Pearson
+
+Para cerrar el análisis bivariado cuantitativo, el mapa de calor reúne en una sola figura los coeficientes de Pearson de las cinco variables cuantitativas, con el fin de comparar de un vistazo la intensidad relativa de las diez asociaciones analizadas de forma individual.
+
+```{r heatmap-correlaciones, fig.height=4.4}
+mapa_calor_correlaciones()
+```
+
+La figura permite ordenar los hallazgos con claridad. Todas las correlaciones son positivas y ninguna es negativa, lo que indica que las cinco variables crecen conjuntamente. La asociación más fuerte es la de ingresos con personal ocupado (0,735), seguida por la de ingresos con inversión en TIC (0,583), lo que confirma que el tamaño empresarial es el eje que organiza todo el conjunto. En el extremo opuesto, la fila correspondiente a inversión en formación presenta sistemáticamente los valores más bajos (0,106 con I+D interna, 0,142 con TIC, 0,214 con personal y 0,242 con ingresos), de manera que esta variable es la que menos se relaciona con las demás.
+
+El aporte de este mapa al objetivo general del estudio es mostrar que las vías de inversión en innovación no forman un bloque homogéneo: la inversión en TIC se comporta como una extensión directa de la escala de la empresa, la I+D interna mantiene una asociación moderada con el tamaño, y la formación del talento humano aparece prácticamente desacoplada de todas las demás variables. Para quien debe decidir dónde destinar recursos, esto significa que la capacitación del personal es el componente en el que menos influye el tamaño de la empresa y, por tanto, el más accesible para organizaciones que no cuentan con la escala de las grandes compañías de la muestra.
+
+# 5. Anexos
+
+## Anexo A — Print screen del dataset
+
+```{r echo=FALSE, out.width="90%", fig.align="center"}
+knitr::include_graphics("Printscreen Dataset.png")
+```
+
+## Datos de referencia del dataset final
+
+- **Fuente:** DANE, Encuesta de Desarrollo e Innovación Tecnológica en los Sectores de Servicios y Comercio — EDITS VIII (2020-2021), microdatos públicos.
+- **Número de registros:** 4.002 empresas.
+- **Número de variables:** 10 (5 cualitativas, 5 cuantitativas).
+- **Periodo de referencia de las variables cuantitativas:** segundo año del periodo (2021).
+- **Método de muestreo:** aleatorio estratificado por tipología de innovación, semilla fija (reproducible).
+
+## Anexo B — Diccionario de variables
+
+``` {r, echo=FALSE, results='asis'}
+# 1. Crear el data frame con los datos del diccionario
+diccionario <- data.frame(
+  Variable = c(
+    "Sector", "Tipología", "Certificación", "Propietario", 
+    "Gerente", "Ingresos", "Inversión ID interna", 
+    "Inversión TIC", "Inversión formación", "Personal"
+  ),
+  `Código original (EDITS)` = c(
+    "CIIU4", "TIPOLO", "VI6R1C1", "VIII1R1C1", 
+    "VIII2R1C1", "I3R2C1", "II1R1C2", 
+    "II1R4C2", "II1R9C2", "IV1R11C2"
+  ),
+  `Qué representa` = c(
+    "Actividad económica de la empresa, según clasificación CIIU4",
+    "Tipología de innovación de la empresa en el periodo de referencia",
+    "La empresa obtuvo certificaciones de calidad de proceso en el periodo de referencia",
+    "Persona propietaria o mayor accionista de la empresa a diciembre del segundo año del periodo",
+    "Indica si quien gerencia la empresa es el/la mismo/a fundador/a o un familiar del fundador/a",
+    "Valor en miles de pesos corrientes de los ingresos o ventas nacionales totales de la empresa en 2021",
+    "Cantidad en miles de pesos corrientes invertidos en actividades de I+D interna en 2021",
+    "Cantidad en miles de pesos corrientes invertidos en TIC, desarrollo de software y análisis de datos en 2021",
+    "Cantidad en miles de pesos corrientes invertidos en formación y capacitación en 2021",
+    "Total de personal ocupado promedio (tiempo completo, permanente y temporal) que laboró en la empresa en 2021"
+  ),
+  `Tipo de variable` = c(
+    "Cualitativa nominal", "Cualitativa nominal", "Cualitativa nominal binaria", 
+    "Cualitativa nominal", "Cualitativa nominal binaria", "Cuantitativa continua", 
+    "Cuantitativa continua", "Cuantitativa continua", "Cuantitativa continua", 
+    "Cuantitativa discreta"
+  ),
+  `Opción de respuesta` = c(
+    "23 categorías (códigos CIIU4), p. ej. 47 = Comercio al por menor, 46 = Comercio al por mayor, 62 = Desarrollo de sistemas informáticos, 86 = Actividades de atención de la salud humana",
+    "AMPLIA = innovadora en sentido amplio; ESTRIC = innovadora en sentido estricto; INTENC = con intención de innovar; NOINNO = no innovadora; POTENC = potencialmente innovadora",
+    "SI - NO",
+    "Fundador(a) / Familiar del fundador(a) / Otro",
+    "SI - NO",
+    "Miles de pesos corrientes",
+    "Miles de pesos corrientes (0 = la empresa no reportó proyectos de innovación en el periodo, por lo que la encuesta no le formula esta pregunta; se recodificó como sin inversión)",
+    "Miles de pesos corrientes (0 = mismo criterio que \"Inversión ID interna\")",
+    "Miles de pesos corrientes (0 = mismo criterio que \"Inversión ID interna\")",
+    "Número de personas"
+  ),
+  check.names = FALSE
+)
+
+# 2. Generar la tabla estilizada para PDF (LaTeX) — TODO VERTICAL
+kbl(
+  diccionario,
+  format    = "latex",
+  booktabs  = TRUE,
+  longtable = TRUE,
+  caption   = "Anexo B — Diccionario de variables",
+  align     = "l",
+  linesep   = "",
+  escape    = TRUE
+) |>
+  kable_styling(
+    latex_options = c("striped", "repeat_header"),
+    font_size     = 10,
+    full_width    = FALSE,
+    stripe_color  = "gray!10",
+    position      = "center"
+  ) |>
+  column_spec(1, bold = TRUE, width = "2.0cm") |>
+  column_spec(2, width = "2.0cm") |>
+  column_spec(3, width = "4.0cm") |>
+  column_spec(4, width = "2.3cm") |>
+  column_spec(5, width = "4.5cm")
+```
+
+\newpage
+
+# 6. Bibliografía
+
+Departamento Administrativo Nacional de Estadística (DANE). (2023). *Encuesta de Desarrollo e Innovación Tecnológica en los Sectores de Servicios y Comercio — EDITS VIII (2020-2021)* [Conjunto de microdatos].\
+<https://microdatos.dane.gov.co/index.php/catalog/867>
+
+Departamento Administrativo Nacional de Estadística (DANE). (s.f.). *Encuesta de Desarrollo e Innovación Tecnológica (EDIT).*\
+<https://www.dane.gov.co/index.php/estadisticas-por-tema/tecnologia-e-innovacion/encuesta-de-desarrollo-e-innovacion-tecnologica-edit>
+
+Departamento Administrativo Nacional de Estadística (DANE). (2020). *Ficha metodológica: Encuesta de Desarrollo e Innovación Tecnológica en los Sectores de Servicios y Comercio, DSO-EDITS-MET-02.*\
+<https://www.dane.gov.co/files/investigaciones/fichas/tecnologia-e-innovacion/DSO-EDITS-MET-02.pdf>
